@@ -1,14 +1,19 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { navItems } from "../data/content";
+import { copy, languageOptions, navItems } from "../data/content";
 import { MaterialIcon } from "../icons/MaterialIcon";
-import type { ScreenId } from "../types";
+import type { Language, ScreenId } from "../types";
 
 type AppShellProps = {
   active: ScreenId;
   setActive: (screen: ScreenId) => void;
+  language: Language;
+  setLanguage: (language: Language) => void;
 };
 
-export function AppShell({ active, setActive }: AppShellProps) {
+export function AppShell({ active, setActive, language, setLanguage }: AppShellProps) {
+  const items = navItems[language];
+  const text = copy[language];
+
   return (
     <>
       <header className="fixed top-0 z-50 w-full border-b border-white/20 bg-white/60 px-5 py-4 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[#141817]/65 md:px-10">
@@ -22,13 +27,13 @@ export function AppShell({ active, setActive }: AppShellProps) {
                 AI Nomad
               </span>
               <span className="mt-1 hidden text-xs font-bold uppercase tracking-[0] text-black/50 dark:text-white/50 sm:block">
-                Монгол аяллын AI хөтөч
+                {text.appTagline}
               </span>
             </button>
           </div>
 
           <nav className="hidden items-center gap-1 rounded-full border border-black/10 bg-white/45 p-1 backdrop-blur-xl dark:border-white/10 dark:bg-white/5 lg:flex">
-            {navItems.map((item) => (
+            {items.map((item) => (
               <button
                 key={item.id}
                 type="button"
@@ -45,12 +50,31 @@ export function AppShell({ active, setActive }: AppShellProps) {
             ))}
           </nav>
 
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <div className="flex rounded-full border border-black/10 bg-white/45 p-1 backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
+              {languageOptions.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => setLanguage(option.value)}
+                  aria-pressed={language === option.value}
+                  className={`rounded-full px-3 py-2 text-xs font-black uppercase tracking-[0] transition ${
+                    language === option.value
+                      ? "bg-[#00658b] text-white shadow-sm dark:bg-[#7dd0ff] dark:text-[#001e2d]"
+                      : "text-black/58 hover:bg-black/5 dark:text-white/58 dark:hover:bg-white/10"
+                  }`}
+                >
+                  {option.value === "mn" ? "MN" : "EN"}
+                </button>
+              ))}
+            </div>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
       <nav className="fixed bottom-5 left-1/2 z-50 flex w-[94%] -translate-x-1/2 items-center justify-around rounded-full border border-white/25 bg-white/35 px-2 py-2 shadow-2xl backdrop-blur-2xl dark:border-white/10 dark:bg-[#101312]/55 lg:hidden">
-        {navItems.slice(0, 5).map((item) => (
+        {items.slice(0, 5).map((item) => (
           <button
             key={item.id}
             type="button"

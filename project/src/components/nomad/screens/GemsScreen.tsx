@@ -1,14 +1,21 @@
-import { hiddenGems, images } from "../data/content";
+import { copy, images } from "../data/content";
 import { ScreenFrame } from "../shared/ScreenFrame";
+import type { Language } from "../types";
 
-export function GemsScreen() {
+type GemsScreenProps = {
+  language: Language;
+};
+
+export function GemsScreen({ language }: GemsScreenProps) {
+  const text = copy[language].gems;
+
   return (
     <ScreenFrame bg={images.steppe}>
       <section className="py-8">
-        <p className="text-sm font-black uppercase tracking-[0] text-[#00658b] dark:text-[#7dd0ff]">Далд эрдэнэс</p>
-        <h2 className="mt-2 text-4xl font-black tracking-[0] md:text-6xl">Олны хөлөөс зайдуу газрууд</h2>
+        <p className="text-sm font-black uppercase tracking-[0] text-[#00658b] dark:text-[#7dd0ff]">{text.eyebrow}</p>
+        <h2 className="mt-2 text-4xl font-black tracking-[0] md:text-6xl">{text.title}</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {hiddenGems.map(([title, region, description, score], index) => (
+          {text.items.map(([title, region, description, score], index) => (
             <article key={title} className={`glass-panel overflow-hidden rounded-[28px] ${index === 0 ? "md:row-span-2" : ""}`}>
               <div className={`${index === 0 ? "h-80" : "h-48"} bg-cover bg-center`} style={{ backgroundImage: `url(${index % 2 ? images.mountain : images.terelj})` }} />
               <div className="p-6">

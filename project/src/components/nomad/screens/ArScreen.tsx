@@ -1,8 +1,15 @@
-import { images } from "../data/content";
+import { copy, images } from "../data/content";
 import { MaterialIcon } from "../icons/MaterialIcon";
 import { ScreenFrame } from "../shared/ScreenFrame";
+import type { Language } from "../types";
 
-export function ArScreen() {
+type ArScreenProps = {
+  language: Language;
+};
+
+export function ArScreen({ language }: ArScreenProps) {
+  const text = copy[language].ar;
+
   return (
     <ScreenFrame bg={images.mountain}>
       <section className="relative min-h-[calc(100vh-7rem)] overflow-hidden rounded-[28px] border border-white/20 bg-black/10">
@@ -12,11 +19,11 @@ export function ArScreen() {
           </div>
           <div className="glass-dark inline-flex items-center gap-2 rounded-full px-5 py-2 text-xs font-black uppercase tracking-[0] text-white">
             <span className="size-2 rounded-full bg-[#71fcb6] shadow-[0_0_12px_rgba(113,252,182,0.9)]" />
-            AR идэвхтэй
+            {text.status}
           </div>
         </div>
-        <ArLabel className="left-[55%] top-[32%]" icon="temple_buddhist" title="Арьяабал хийд" meta="450 м • 12 мин алхана" />
-        <ArLabel className="left-[18%] top-[55%]" icon="hiking" title="Өмнөд нурууны зам" meta="1.1 км • өгсүүр" />
+        <ArLabel className="left-[55%] top-[32%]" icon="temple_buddhist" title={text.labels[0].title} meta={text.labels[0].meta} />
+        <ArLabel className="left-[18%] top-[55%]" icon="hiking" title={text.labels[1].title} meta={text.labels[1].meta} />
       </section>
     </ScreenFrame>
   );
