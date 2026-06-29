@@ -1,4 +1,5 @@
 import { copy, images } from "../data/content";
+import { OrnamentDivider } from "../shared/Ornament";
 import { ScreenFrame } from "../shared/ScreenFrame";
 import type { Language } from "../types";
 
@@ -14,6 +15,7 @@ export function GemsScreen({ language }: GemsScreenProps) {
       <section className="py-8">
         <p className="text-sm font-black uppercase tracking-[0] text-[#00658b] dark:text-[#7dd0ff]">{text.eyebrow}</p>
         <h2 className="mt-2 text-4xl font-black tracking-[0] md:text-6xl">{text.title}</h2>
+        <OrnamentDivider className="mt-6 justify-start!" />
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {text.items.map(([title, region, description, score], index) => (
             <article key={title} className={`glass-panel overflow-hidden rounded-[28px] ${index === 0 ? "md:row-span-2" : ""}`}>

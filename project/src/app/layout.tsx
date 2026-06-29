@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -16,6 +16,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "AI Nomad | Монголын далд аяллын хөтөч",
   description: "Монголын олны хөлөөс зайдуу үзэсгэлэнт газруудыг AI Nomad-аар судлаарай.",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: { capable: true, title: "AI Nomad", statusBarStyle: "black-translucent" },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#00658b" },
+    { media: "(prefers-color-scheme: dark)", color: "#080b0d" },
+  ],
 };
 
 export default function RootLayout({

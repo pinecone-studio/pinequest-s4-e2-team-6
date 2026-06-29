@@ -20,7 +20,7 @@ export function AppShell({ active, setActive, language, setLanguage }: AppShellP
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6 md:px-10">
           {/* Brand */}
           <button type="button" onClick={() => setActive("discover")} className="flex items-center gap-2.5 text-left">
-            <span className="grid size-8 place-items-center rounded-xl bg-linear-to-br from-[#6bcbff] via-[#00658b] to-[#7b61ff] text-white shadow-md shadow-[#00658b]/30 sm:size-9">
+            <span className="grid size-8 place-items-center rounded-xl bg-linear-to-br from-[#6bcbff] via-[#00658b] to-[#e0a32e] text-white shadow-md shadow-[#00658b]/30 sm:size-9">
               <MaterialIcon name="explore" className="size-4.5" />
             </span>
             <span className="leading-none">
@@ -42,7 +42,7 @@ export function AppShell({ active, setActive, language, setLanguage }: AppShellP
                 onClick={() => setActive(item.id)}
                 className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-tight transition ${
                   active === item.id
-                    ? "bg-linear-to-r from-[#00658b] to-[#0a86b8] text-white shadow-sm dark:from-[#6bcbff] dark:to-[#7b61ff] dark:text-[#001e2d]"
+                    ? "bg-linear-to-r from-[#00658b] to-[#0a86b8] text-white shadow-sm dark:from-[#6bcbff] dark:to-[#e0a32e] dark:text-[#001e2d]"
                     : "text-black/55 hover:bg-black/5 dark:text-white/55 dark:hover:bg-white/10"
                 }`}
               >
@@ -102,7 +102,7 @@ function BottomNav({
             aria-current={on ? "page" : undefined}
             className={`flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-2xl px-1 py-2 transition ${
               on
-                ? "bg-linear-to-br from-[#6bcbff] to-[#00658b] text-white shadow-lg shadow-[#00658b]/30 dark:from-[#6bcbff] dark:to-[#7b61ff] dark:text-[#001e2d]"
+                ? "bg-linear-to-br from-[#6bcbff] to-[#00658b] text-white shadow-lg shadow-[#00658b]/30 dark:from-[#6bcbff] dark:to-[#e0a32e] dark:text-[#001e2d]"
                 : "text-black/50 dark:text-white/55"
             }`}
           >

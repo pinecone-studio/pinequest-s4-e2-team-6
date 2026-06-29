@@ -1,0 +1,13 @@
+{
+  "name": "AI Nomad — Mongolia travel guide",
+  "short_name": "AI Nomad",
+  "description": "AI camera, offline GPS, culture chat and smart routes for traveling Mongolia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080b0d",
+  "theme_color": "#00658b",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/globe.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

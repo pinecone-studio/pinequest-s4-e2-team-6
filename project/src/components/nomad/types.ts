@@ -1,4 +1,4 @@
-export type ScreenId = "discover" | "camera" | "ar" | "planner" | "gems" | "culture" | "offline" | "safety";
+export type ScreenId = "discover" | "camera" | "ar" | "planner" | "gems" | "offline" | "currency" | "safety";
 
 export type Language = "mn" | "en";
 
