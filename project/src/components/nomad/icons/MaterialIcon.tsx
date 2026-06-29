@@ -43,6 +43,11 @@ const iconPaths: Record<string, string> = {
   sos: "M4 7h16v10H4V7Zm3 3v4h2v-1h1v1h2v-4H7Zm2 1.5h1v1H9v-1Zm4.5-1.5a2 2 0 0 0 0 4H15a2 2 0 0 0 0-4h-1.5Zm0 1.5H15a.5.5 0 0 1 0 1h-1.5a.5.5 0 0 1 0-1Z",
   close: "M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3 1.4 1.4Z",
   chat: "M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4V6a2 2 0 0 1 2-2Zm3 5v2h10V9H7Zm0 4v2h7v-2H7Z",
+  restaurant: "M8 2v7a2 2 0 0 1-2 2v11H4V11a2 2 0 0 1-2-2V2h2v6h1V2h2v6h1V2h2Zm6 0c-1.7 0-3 2-3 5 0 2.2 1 3.6 2 4v9h2V11c1-.4 2-1.8 2-4 0-3-1.3-5-3-5Z",
+  store: "M4 4h16l1.5 5v1a3 3 0 0 1-5 2 3 3 0 0 1-5 0 3 3 0 0 1-5 0 3 3 0 0 1-5-2V9L4 4Zm0 9.7V20h7v-4h2v4h7v-6.3a4.9 4.9 0 0 1-4-1 5 5 0 0 1-5 0 5 5 0 0 1-5 0 4.9 4.9 0 0 1-2 1Z",
+  park: "M12 2 5 14h4l-3 6h12l-3-6h4L12 2Zm-1 18h2v2h-2v-2Z",
+  location_city: "M11 7V3H3v18h18V7H11ZM7 19H5v-2h2v2Zm0-4H5v-2h2v2Zm0-4H5V9h2v2Zm0-4H5V5h2v2Zm12 12h-6v-2h2v-2h-2v-2h2v-2h-2V9h6v10Zm-2-8h-2v2h2v-2Zm0 4h-2v2h2v-2Z",
+  cabin: "M12 3 2 11h3v9h14v-9h3L12 3Zm0 5.5 4 3.2V18h-3v-4h-2v4H8v-6.3l4-3.2Z",
 };
 
 export function MaterialIcon({ name, className = "" }: MaterialIconProps) {

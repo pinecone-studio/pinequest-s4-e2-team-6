@@ -19,7 +19,7 @@ export function ChatComposer({ language, disabled, showSuggestions, onSend }: Pr
 
   const submit = () => {
     const text = value.trim();
-    if (!text || disabled) return;
+    if (!text) return; // sending mid-stream interrupts the previous reply
     onSend(text);
     setValue("");
   };
@@ -54,7 +54,7 @@ export function ChatComposer({ language, disabled, showSuggestions, onSend }: Pr
         <button
           type="button"
           onClick={submit}
-          disabled={disabled || !value.trim()}
+          disabled={!value.trim()}
           aria-label={t.send}
           className="grid size-11 shrink-0 place-items-center rounded-full bg-linear-to-br from-[#00658b] to-[#0a86b8] text-white shadow-lg shadow-[#00658b]/30 transition hover:scale-105 disabled:opacity-40 disabled:hover:scale-100 dark:from-[#6bcbff] dark:to-[#e0a32e] dark:text-[#001e2d]"
         >
