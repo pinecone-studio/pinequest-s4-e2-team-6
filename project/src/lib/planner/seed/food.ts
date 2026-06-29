@@ -1,0 +1,46 @@
+import type { PlannerPlace } from "../types";
+
+const f = (
+  id: string,
+  mn: string,
+  en: string,
+  lat: number,
+  lng: number,
+  price: number,
+  durationMin: number,
+  openHours: string,
+): PlannerPlace => ({ id, nameMn: mn, nameEn: en, category: "FOOD", lat, lng, price, durationMin, openHours });
+
+/** ~30 Ulaanbaatar eateries within the city bbox. */
+export const food: PlannerPlace[] = [
+  f("fd-zochin", "Зочин буудал", "Zochin Restaurant", 47.9185, 106.9171, 16000, 60, "10:00-22:00"),
+  f("fd-modern", "Модерн Номадс", "Modern Nomads", 47.9148, 106.9075, 28000, 75, "11:00-23:00"),
+  f("fd-bull", "Bull Хотпот", "Bull Hotpot", 47.9132, 106.9216, 35000, 90, "11:00-23:00"),
+  f("fd-khaan", "Хаан Буз", "Khaan Buuz", 47.9201, 106.9128, 9000, 40, "08:00-21:00"),
+  f("fd-veranda", "Веранда", "Veranda", 47.9166, 106.9182, 32000, 80, "12:00-23:00"),
+  f("fd-rosewood", "Rosewood Kitchen", "Rosewood Kitchen", 47.9159, 106.9136, 30000, 80, "11:00-22:00"),
+  f("fd-namaste", "Намасте", "Namaste India", 47.9112, 106.9098, 24000, 70, "11:00-22:00"),
+  f("fd-hazara", "Хазара", "Hazara", 47.9095, 106.9163, 38000, 90, "12:00-22:30"),
+  f("fd-broadway", "Бродвей пицца", "Broadway Pizza", 47.9224, 106.9192, 22000, 60, "10:00-23:00"),
+  f("fd-ttc", "Таван богд хоол", "TTC Food Court", 47.9138, 106.9182, 14000, 50, "10:00-22:00"),
+  f("fd-luna", "Луна Бланка", "Luna Blanca", 47.9171, 106.9159, 18000, 60, "10:00-21:00"),
+  f("fd-grandkhaan", "Гранд Хаан Ириш", "Grand Khaan Irish Pub", 47.9163, 106.9201, 26000, 80, "12:00-00:00"),
+  f("fd-pinkpan", "Pink Panther", "Pink Panther Bistro", 47.9189, 106.9214, 21000, 60, "09:00-22:00"),
+  f("fd-sakura", "Сакура", "Sakura Sushi", 47.9106, 106.9122, 34000, 80, "11:30-22:00"),
+  f("fd-kimchi", "Кимчи", "Seoul Kimchi", 47.9217, 106.9087, 19000, 60, "10:00-22:00"),
+  f("fd-mongoliana", "Монголиана", "Mongoliana", 47.9128, 106.9151, 23000, 70, "11:00-22:00"),
+  f("fd-cuckoo", "Cuckoo", "Cuckoo Restaurant", 47.9203, 106.9233, 25000, 70, "11:00-23:00"),
+  f("fd-shildeg", "Шилдэг шарсан мах", "Shildeg BBQ", 47.9092, 106.9201, 27000, 80, "12:00-23:00"),
+  f("fd-ananda", "Ананда веган", "Ananda Vegan", 47.9176, 106.9094, 17000, 55, "10:00-21:00"),
+  f("fd-millie", "Millie's Cafe", "Millie's Espresso", 47.9152, 106.9168, 20000, 60, "09:00-21:00"),
+  f("fd-bd", "Их Дэлгүүр хоол", "State Store Deli", 47.9148, 106.9163, 12000, 45, "09:00-22:00"),
+  f("fd-silk", "Торгон зам", "Silk Road", 47.9119, 106.9229, 29000, 80, "11:00-22:30"),
+  f("fd-caravan", "Караван", "Caravan", 47.9214, 106.9148, 24000, 70, "10:00-22:00"),
+  f("fd-budda", "Будда хоол", "Buddha Vegetarian", 47.9101, 106.9136, 15000, 55, "10:00-21:00"),
+  f("fd-steppe", "Steppe Nomads", "Steppe Nomads Grill", 47.9231, 106.9121, 31000, 85, "12:00-23:00"),
+  f("fd-rivertea", "Цайны газар", "River Tea House", 47.9168, 106.9111, 11000, 45, "09:00-20:00"),
+  f("fd-dlux", "D-Lux", "D-Lux Restaurant", 47.9143, 106.9197, 33000, 85, "11:00-23:00"),
+  f("fd-toscana", "Тоскана", "Toscana Italiano", 47.9187, 106.9102, 30000, 80, "11:00-22:30"),
+  f("fd-khorkhog", "Хорхог гэр", "Khorkhog Ger", 47.9249, 106.9208, 26000, 90, "11:00-22:00"),
+  f("fd-noodle", "Гоймонгийн газар", "Noodle House", 47.9097, 106.9178, 13000, 45, "10:00-21:00"),
+];

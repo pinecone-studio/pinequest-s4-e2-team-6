@@ -25,7 +25,7 @@ export default function HomePage() {
       {activeScreen === "camera" && <CameraScreen language={language} />}
       {activeScreen === "ar" && <ArScreen language={language} />}
       {activeScreen === "planner" && <PlannerScreen language={language} />}
-      {activeScreen === "gems" && <GemsScreen language={language} />}
+      {activeScreen === "gems" && <GemsScreen language={language} setActive={setActiveScreen} />}
       {activeScreen === "offline" && <OfflineScreen language={language} />}
       {activeScreen === "currency" && <CurrencyScreen language={language} />}
       {activeScreen === "safety" && <SafetyScreen language={language} />}

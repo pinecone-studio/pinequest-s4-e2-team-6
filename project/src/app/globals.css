@@ -163,9 +163,11 @@ html {
 .animate-radar { transform-origin: center; animation: spin360 3.6s linear infinite; }
 .animate-kenburns { animation: kenburns 26s ease-in-out infinite alternate; }
 .animate-spin-slow { animation: spin360 9s linear infinite; }
-.delay-1 { animation-delay: 0.08s; }
-.delay-2 { animation-delay: 0.16s; }
-.delay-3 { animation-delay: 0.24s; }
+@keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.22); } }
+@keyframes draw-down { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.animate-breathe { animation: breathe 2.4s ease-in-out infinite; }
+.animate-draw { transform-origin: top; animation: draw-down 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.delay-1 { animation-delay: 0.08s; } .delay-2 { animation-delay: 0.16s; } .delay-3 { animation-delay: 0.24s; }
 
 /* Glowing ring that radiates out from the AI advisor avatar */
 .pulse-ring::before {
@@ -189,7 +191,7 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aurora-blob, .animate-float, .animate-fade-up, .animate-kenburns,
+  .aurora-blob, .animate-float, .animate-fade-up, .animate-kenburns, .animate-breathe, .animate-draw,
   .animate-spin-slow, .pulse-ring::before, .typing-dot, .animate-radar { animation: none; }
   html { scroll-behavior: auto; }
 }

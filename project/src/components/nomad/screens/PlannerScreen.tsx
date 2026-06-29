@@ -1,68 +1,52 @@
-import { copy, images } from "../data/content";
-import { MaterialIcon } from "../icons/MaterialIcon";
+"use client";
+
+import { images } from "../data/content";
 import { ScreenFrame } from "../shared/ScreenFrame";
-import { StatCard } from "../shared/StatCard";
+import { OrnamentDivider } from "../shared/Ornament";
+import { BudgetBar } from "../planner/BudgetBar";
+import { PlannerInput } from "../planner/PlannerInput";
+import { RefineBar } from "../planner/RefineBar";
+import { Timeline } from "../planner/Timeline";
+import { plannerCopy } from "../planner/plannerCopy";
+import { usePlanner } from "@/lib/planner/usePlanner";
 import type { Language } from "../types";
 
-type PlannerScreenProps = {
-  language: Language;
-};
+type PlannerScreenProps = { language: Language };
 
+/**
+ * AI day planner: free-text request → AI extracts budget/time/interests →
+ * picks a grounded route from ~120 curated UB places → validated timeline.
+ */
 export function PlannerScreen({ language }: PlannerScreenProps) {
-  const text = copy[language].planner;
+  const t = plannerCopy[language];
+  const { itinerary, params, loading, error, generate, adjust } = usePlanner(language);
+  const hasRoute = itinerary && params && itinerary.stops.length > 0;
 
   return (
     <ScreenFrame bg={images.steppe}>
-      <section className="grid gap-6 py-6 md:grid-cols-[0.85fr_1.35fr]">
-        <div className="space-y-5">
-          <div className="glass-panel rounded-[28px] p-6">
-            <p className="text-xs font-black uppercase tracking-[0] text-black/50 dark:text-white/50">{text.promptLabel}</p>
-            <p className="mt-3 text-xl font-semibold">{text.prompt}</p>
+      <section className="mx-auto max-w-2xl space-y-5 py-6">
+        <header className="animate-fade-up text-center">
+          <p className="text-sm font-black uppercase tracking-tight text-[#00658b] dark:text-[#7dd0ff]">{t.eyebrow}</p>
+          <h2 className="mt-1 text-3xl font-black tracking-tight sm:text-5xl">{t.title}</h2>
+          <p className="mx-auto mt-2 max-w-md leading-7 text-black/60 dark:text-white/60">{t.subtitle}</p>
+          <OrnamentDivider className="mt-5" />
+        </header>
+
+        <PlannerInput language={language} loading={loading} onGenerate={generate} />
+
+        {error && (
+          <p className="rounded-2xl bg-red-500/10 px-4 py-3 text-center text-sm font-bold text-red-600 dark:text-red-400">
+            {error === "empty" ? t.empty : t.error}
+          </p>
+        )}
+
+        {hasRoute && (
+          <div className="animate-fade-up space-y-4">
+            <BudgetBar itinerary={itinerary} params={params} language={language} />
+            <Timeline itinerary={itinerary} language={language} />
+            <RefineBar language={language} params={params} loading={loading} onAdjust={adjust} />
           </div>
-          <div className="glass-panel rounded-[28px] p-6">
-            <div className="mb-5 flex items-center gap-3">
-              <span className="grid size-11 place-items-center rounded-full bg-[#6bcbff] text-[#00344b]">
-                <MaterialIcon name="psychology" />
-              </span>
-              <span className="text-xs font-black uppercase tracking-[0] text-[#00658b] dark:text-[#7dd0ff]">{text.badge}</span>
-            </div>
-            <h2 className="text-3xl font-black tracking-[0]">{text.title}</h2>
-            <p className="mt-3 leading-7 text-black/65 dark:text-white/65">
-              {text.description}
-            </p>
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              <StatCard icon="schedule" value={text.durationValue} label={text.durationLabel} />
-              <StatCard icon="payments" value={text.costValue} label={text.costLabel} />
-            </div>
-          </div>
-        </div>
-        <div className="space-y-5">
-          <div className="glass-panel h-64 overflow-hidden rounded-[28px]">
-            <div className="h-full bg-cover bg-center" style={{ backgroundImage: `url(${images.map})` }}>
-              <div className="flex h-full items-end justify-end bg-gradient-to-t from-black/40 to-transparent p-5">
-                <button type="button" className="inline-flex items-center gap-2 rounded-full bg-[#00658b] px-5 py-3 text-sm font-black uppercase tracking-[0] text-white">
-                  <MaterialIcon name="navigation" className="size-[18px]" />
-                  {text.startRoute}
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="space-y-4">
-            {text.stops.map(([time, title, description, duration, price]) => (
-              <div key={title} className="glass-panel rounded-[24px] p-5">
-                <div className="mb-2 flex items-start justify-between gap-4">
-                  <h3 className="text-xl font-black">{title}</h3>
-                  <span className="rounded-full bg-[#6bcbff]/20 px-3 py-1 text-xs font-black text-[#00658b] dark:text-[#7dd0ff]">{time}</span>
-                </div>
-                <p className="text-black/62 dark:text-white/62">{description}</p>
-                <div className="mt-4 flex gap-4 border-t border-black/10 pt-3 text-xs font-black uppercase tracking-[0] text-black/55 dark:border-white/10 dark:text-white/55">
-                  <span>{duration}</span>
-                  <span>{price}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        )}
       </section>
     </ScreenFrame>
   );

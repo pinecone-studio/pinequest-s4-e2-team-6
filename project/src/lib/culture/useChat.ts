@@ -22,7 +22,8 @@ export function useChat(language: Language, greeting: string) {
   const send = useCallback(
     async (text: string) => {
       const trimmed = text.trim();
-      if (!trimmed || streaming) return;
+      if (!trimmed) return;
+      abortRef.current?.abort(); // interrupt any in-flight reply so chat never blocks
       setError(null);
 
       const userMsg: ChatMessage = { id: newId(), role: "user", content: trimmed };
@@ -74,11 +75,15 @@ export function useChat(language: Language, greeting: string) {
           prev.filter((m) => m.id !== botId || m.content || m.images?.length),
         );
       } finally {
-        setStreaming(false);
-        abortRef.current = null;
+        // Only the most recent request owns the streaming flag — a superseded
+        // (aborted) request must not clear it out from under the new one.
+        if (abortRef.current === controller) {
+          setStreaming(false);
+          abortRef.current = null;
+        }
       }
     },
-    [language, messages, streaming],
+    [language, messages],
   );
 
   const stop = useCallback(() => abortRef.current?.abort(), []);
