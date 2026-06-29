@@ -1,7 +1,7 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { copy, languageOptions, navItems } from "../data/content";
 import { MaterialIcon } from "../icons/MaterialIcon";
-import type { Language, ScreenId } from "../types";
+import type { Language, NavItem, ScreenId } from "../types";
 
 type AppShellProps = {
   active: ScreenId;
@@ -16,52 +16,55 @@ export function AppShell({ active, setActive, language, setLanguage }: AppShellP
 
   return (
     <>
-      <header className="fixed top-0 z-50 w-full border-b border-white/20 bg-white/60 px-5 py-4 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-[#141817]/65 md:px-10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="grid size-10 place-items-center rounded-full border border-black/10 bg-[#e5e2e1] text-[#00658b] shadow-inner dark:border-white/10 dark:bg-white/10 dark:text-[#7dd0ff]">
-              <MaterialIcon name="person" />
-            </div>
-            <button type="button" onClick={() => setActive("discover")} className="text-left">
-              <span className="block text-2xl font-black leading-none tracking-[0] text-[#1c1b1b] dark:text-[#f3f0ef]">
-                AI Nomad
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/30 bg-white/55 backdrop-blur-2xl dark:border-white/10 dark:bg-[#0b0f11]/65">
+        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6 md:px-10">
+          {/* Brand */}
+          <button type="button" onClick={() => setActive("discover")} className="flex items-center gap-2.5 text-left">
+            <span className="grid size-8 place-items-center rounded-xl bg-linear-to-br from-[#6bcbff] via-[#00658b] to-[#7b61ff] text-white shadow-md shadow-[#00658b]/30 sm:size-9">
+              <MaterialIcon name="explore" className="size-4.5" />
+            </span>
+            <span className="leading-none">
+              <span className="block text-sm font-black tracking-tight sm:text-base">
+                AI <span className="text-gradient">Nomad</span>
               </span>
-              <span className="mt-1 hidden text-xs font-bold uppercase tracking-[0] text-black/50 dark:text-white/50 sm:block">
+              <span className="mt-0.5 hidden text-[9px] font-bold uppercase tracking-[0.08em] text-black/45 dark:text-white/45 sm:block">
                 {text.appTagline}
               </span>
-            </button>
-          </div>
+            </span>
+          </button>
 
-          <nav className="hidden items-center gap-1 rounded-full border border-black/10 bg-white/45 p-1 backdrop-blur-xl dark:border-white/10 dark:bg-white/5 lg:flex">
+          {/* Desktop nav */}
+          <nav className="hidden items-center gap-0.5 rounded-full border border-black/10 bg-white/50 p-1 backdrop-blur-xl dark:border-white/10 dark:bg-white/5 lg:flex">
             {items.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => setActive(item.id)}
-                className={`flex items-center gap-2 rounded-full px-3 py-2 text-xs font-black uppercase tracking-[0] transition ${
+                className={`flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-tight transition ${
                   active === item.id
-                    ? "bg-[#00658b] text-white shadow-sm dark:bg-[#7dd0ff] dark:text-[#001e2d]"
-                    : "text-black/58 hover:bg-black/5 dark:text-white/58 dark:hover:bg-white/10"
+                    ? "bg-linear-to-r from-[#00658b] to-[#0a86b8] text-white shadow-sm dark:from-[#6bcbff] dark:to-[#7b61ff] dark:text-[#001e2d]"
+                    : "text-black/55 hover:bg-black/5 dark:text-white/55 dark:hover:bg-white/10"
                 }`}
               >
-                <MaterialIcon name={item.icon} className="size-[18px]" />
+                <MaterialIcon name={item.icon} className="size-4" />
                 {item.label}
               </button>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <div className="flex rounded-full border border-black/10 bg-white/45 p-1 backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
+          {/* Controls */}
+          <div className="flex items-center gap-1.5">
+            <div className="flex rounded-full border border-black/10 bg-white/50 p-0.5 backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
               {languageOptions.map((option) => (
                 <button
                   key={option.value}
                   type="button"
                   onClick={() => setLanguage(option.value)}
                   aria-pressed={language === option.value}
-                  className={`rounded-full px-3 py-2 text-xs font-black uppercase tracking-[0] transition ${
+                  className={`rounded-full px-2.5 py-1.5 text-[11px] font-black uppercase transition ${
                     language === option.value
-                      ? "bg-[#00658b] text-white shadow-sm dark:bg-[#7dd0ff] dark:text-[#001e2d]"
-                      : "text-black/58 hover:bg-black/5 dark:text-white/58 dark:hover:bg-white/10"
+                      ? "bg-[#00658b] text-white shadow-sm dark:bg-[#6bcbff] dark:text-[#001e2d]"
+                      : "text-black/50 hover:bg-black/5 dark:text-white/50 dark:hover:bg-white/10"
                   }`}
                 >
                   {option.value === "mn" ? "MN" : "EN"}
@@ -73,23 +76,43 @@ export function AppShell({ active, setActive, language, setLanguage }: AppShellP
         </div>
       </header>
 
-      <nav className="fixed bottom-5 left-1/2 z-50 flex w-[94%] -translate-x-1/2 items-center justify-around rounded-full border border-white/25 bg-white/35 px-2 py-2 shadow-2xl backdrop-blur-2xl dark:border-white/10 dark:bg-[#101312]/55 lg:hidden">
-        {items.slice(0, 5).map((item) => (
+      <BottomNav items={items} active={active} setActive={setActive} />
+    </>
+  );
+}
+
+function BottomNav({
+  items,
+  active,
+  setActive,
+}: {
+  items: NavItem[];
+  active: ScreenId;
+  setActive: (screen: ScreenId) => void;
+}) {
+  return (
+    <nav className="fixed bottom-3 left-1/2 z-50 flex w-[min(94%,30rem)] -translate-x-1/2 items-center justify-around gap-0.5 rounded-[22px] border border-white/30 bg-white/45 p-1.5 shadow-2xl shadow-black/20 backdrop-blur-2xl dark:border-white/10 dark:bg-[#0b0f11]/70 lg:hidden">
+      {items.slice(0, 5).map((item) => {
+        const on = active === item.id;
+        return (
           <button
             key={item.id}
             type="button"
             onClick={() => setActive(item.id)}
-            className={`flex min-w-0 flex-1 flex-col items-center justify-center rounded-full px-2 py-2 text-[10px] font-black uppercase tracking-[0] transition ${
-              active === item.id
-                ? "bg-[#6bcbff]/85 text-[#00344b] dark:bg-[#00658b]/80 dark:text-white"
-                : "text-black/58 dark:text-white/60"
+            aria-current={on ? "page" : undefined}
+            className={`flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-2xl px-1 py-2 transition ${
+              on
+                ? "bg-linear-to-br from-[#6bcbff] to-[#00658b] text-white shadow-lg shadow-[#00658b]/30 dark:from-[#6bcbff] dark:to-[#7b61ff] dark:text-[#001e2d]"
+                : "text-black/50 dark:text-white/55"
             }`}
           >
-            <MaterialIcon name={item.icon} className="mb-1 size-[22px]" />
-            <span className="max-w-full truncate">{item.label}</span>
+            <MaterialIcon name={item.icon} className={`size-5 transition ${on ? "scale-110" : ""}`} />
+            <span className="max-w-full truncate text-[9px] font-black uppercase tracking-tight">
+              {item.label}
+            </span>
           </button>
-        ))}
-      </nav>
-    </>
+        );
+      })}
+    </nav>
   );
 }
