@@ -1,8 +1,4 @@
-/**
- * Per-gem photos. Paste an image URL (https://…) or a /public path for each
- * gem id below. Leave "" to show a styled gradient placeholder instead of a
- * broken image. (Keys match the gem ids in lib/gems/data/*.ts.)
- */
+
 export const gemImages: Record<string, string> = {
   // — Gobi / south —
   khongor: "",
@@ -11,8 +7,8 @@ export const gemImages: Record<string, string> = {
   "khermen-tsav": "",
   gurvansaikhan: "",
   "tsagaan-suvarga": "",
-  "baga-gazriin": "",
-  "ikh-gazriin": "",
+  "baga-gazriin": "/bagagazriin.jpeg",
+  "ikh-gazriin": "/ihgazriin.jpeg",
   khamar: "",
   "ikh-nart": "/ihnart.jpeg",
   senjit: "/senjidhad.jpeg",
@@ -23,7 +19,7 @@ export const gemImages: Record<string, string> = {
   // — Central —
   terelj: "",
   khustai: "",
-  "chinggis-statue": "",
+  "chinggis-statue": "chingis.jpeg",
   manzushir: "",
   "turtle-rock": "",
   "orkhon-fall": "",
@@ -63,10 +59,10 @@ export const gemImages: Record<string, string> = {
   "khalkhin-gol": "",
   "buir-nuur": "",
   "shiliin-bogd": "",
-  "ganga-nuur": "",
+  "ganga-nuur": "/ganganuur.jpeg",
 };
 
-/** Image URL for a gem, or null when none is set yet (→ gradient placeholder). */
+
 export function gemImage(id: string): string | null {
   const url = gemImages[id];
   return url && url.length > 0 ? url : null;
