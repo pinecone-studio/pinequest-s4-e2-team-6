@@ -1,59 +1,104 @@
-import { copy, images } from "../data/content";
+"use client";
+
+import { useCallback } from "react";
+import { images } from "../data/content";
 import { MaterialIcon } from "../icons/MaterialIcon";
-import { CurrencyRow } from "../shared/CurrencyRow";
 import { ScreenFrame } from "../shared/ScreenFrame";
-import { StatCard } from "../shared/StatCard";
+import { CoordReadout } from "../offline/CoordReadout";
+import { EnableGpsCard } from "../offline/EnableGpsCard";
+import { GpsRadar } from "../offline/GpsRadar";
+import { OfflineConverter } from "../offline/OfflineConverter";
+import { OfflineStatusBar } from "../offline/OfflineStatusBar";
+import { Phrasebook } from "../offline/Phrasebook";
+import { WaypointList } from "../offline/WaypointList";
+import { offlineCopy } from "../offline/offlineCopy";
+import { bearing, distanceKm } from "@/lib/offline/geo";
+import { waypoints } from "@/lib/offline/waypoints";
+import { useCompass } from "@/lib/offline/useCompass";
+import { useGeolocation } from "@/lib/offline/useGeolocation";
+import { useOnlineStatus } from "@/lib/offline/useOnlineStatus";
 import type { Language } from "../types";
 
-type OfflineScreenProps = {
-  language: Language;
-};
+type OfflineScreenProps = { language: Language };
 
 export function OfflineScreen({ language }: OfflineScreenProps) {
-  const text = copy[language].offline;
+  const t = offlineCopy[language];
+  const online = useOnlineStatus();
+  const { fix, status, start: startGps } = useGeolocation();
+  const { heading: compassHeading, start: startCompass } = useCompass();
+
+  const enable = useCallback(() => {
+    startGps();
+    startCompass();
+  }, [startGps, startCompass]);
+
+  const here = fix ? { lat: fix.lat, lng: fix.lng } : null;
+  const radarBlips = buildBlips(here);
+  const heading = compassHeading ?? fix?.heading ?? null;
 
   return (
     <ScreenFrame bg={images.map}>
-      <section className="py-8">
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0] text-[#00658b] dark:text-[#7dd0ff]">{text.eyebrow}</p>
-            <h2 className="mt-2 text-4xl font-black tracking-[0]">{text.title}</h2>
+      <section className="space-y-5 py-6">
+        <header className="animate-fade-up">
+          <p className="text-sm font-black uppercase tracking-tight text-[#00658b] dark:text-[#7dd0ff]">{t.eyebrow}</p>
+          <h2 className="mt-1 text-3xl font-black tracking-tight sm:text-5xl">{t.title}</h2>
+          <p className="mt-2 max-w-2xl leading-7 text-black/60 dark:text-white/60">{t.subtitle}</p>
+        </header>
+
+        <OfflineStatusBar online={online} fix={fix} language={language} />
+
+        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="glass-panel flex items-center justify-center rounded-[28px] p-6">
+            {fix ? (
+              <GpsRadar heading={heading} blips={radarBlips} label={t.youAreHere} />
+            ) : (
+              <EnableGpsCard status={status} language={language} onEnable={enable} />
+            )}
           </div>
-          <span className="hidden items-center gap-2 rounded-full bg-[#71fcb6]/25 px-4 py-2 text-xs font-black uppercase tracking-[0] text-[#005233] dark:text-[#71fcb6] md:inline-flex">
-            <span className="size-2 rounded-full bg-[#71fcb6]" />
-            {text.ready}
-          </span>
-        </div>
-        <div className="grid gap-4 md:grid-cols-4">
-          <StatCard icon="satellite_alt" value={text.gpsValue} label={text.gpsLabel} />
-          <StatCard icon="explore" value="342° NW" label={text.directionLabel} />
-          <div className="glass-panel overflow-hidden rounded-[28px] md:col-span-2">
-            <div className="h-52 bg-cover bg-center" style={{ backgroundImage: `url(${images.map})` }} />
-            <div className="p-6">
-              <p className="text-xs font-black uppercase tracking-[0] text-[#00658b] dark:text-[#7dd0ff]">{text.downloaded}</p>
-              <h3 className="mt-1 text-2xl font-black">{text.mapTitle}</h3>
-              <p className="mt-1 text-black/60 dark:text-white/60">Vector + topo • 1.2 GB</p>
-            </div>
-          </div>
-          <div className="glass-panel rounded-[28px] p-6 md:col-span-2">
-            <h3 className="text-xs font-black uppercase tracking-[0] text-black/50 dark:text-white/50">{text.currencyTitle}</h3>
-            <div className="mt-4 space-y-3">
-              <CurrencyRow label="USD" value="100" suffix="$" />
-              <CurrencyRow label="MNT" value="338,500" suffix="₮" highlight />
-            </div>
-          </div>
-          <div className="glass-panel rounded-[28px] p-6 md:col-span-2">
-            <h3 className="mb-3 text-xs font-black uppercase tracking-[0] text-black/50 dark:text-white/50">{text.languageTitle}</h3>
-            {text.languages.map((item, index) => (
-              <div key={item} className="flex items-center justify-between border-b border-black/10 py-3 last:border-0 dark:border-white/10">
-                <span>{item}</span>
-                <MaterialIcon name={index < 2 ? "check_circle" : "download"} className={index < 2 ? "text-[#006c45]" : "text-[#6f7880]"} />
+
+          <div className="space-y-4">
+            {fix ? (
+              <CoordReadout fix={fix} language={language} />
+            ) : (
+              <div className="glass-panel grid h-full min-h-40 place-items-center rounded-[28px] p-6 text-center text-sm text-black/50 dark:text-white/50">
+                {t.subtitle}
               </div>
-            ))}
+            )}
           </div>
         </div>
+
+        {here && <WaypointList here={here} language={language} />}
+
+        <div className="grid gap-4 md:grid-cols-2">
+          <ReadyCard t={t} />
+          <OfflineConverter language={language} />
+        </div>
+
+        <Phrasebook language={language} />
       </section>
     </ScreenFrame>
   );
+}
+
+function ReadyCard({ t }: { t: (typeof offlineCopy)[Language] }) {
+  return (
+    <div className="glass-panel overflow-hidden rounded-[28px]">
+      <div className="bg-linear-to-br from-[#00658b] to-[#e0a32e] p-6 text-white">
+        <MaterialIcon name="cloud_download" className="size-7" />
+        <h3 className="mt-3 text-xl font-black tracking-tight">{t.readyTitle}</h3>
+      </div>
+      <p className="p-6 text-sm leading-6 text-black/60 dark:text-white/60">{t.readyDesc}</p>
+    </div>
+  );
+}
+
+function buildBlips(here: { lat: number; lng: number } | null) {
+  if (!here) return [];
+  const dists = waypoints.map((w) => distanceKm(here, w.coord));
+  const max = Math.max(1, ...dists);
+  return waypoints.map((w, i) => ({
+    id: w.id,
+    bearing: bearing(here, w.coord),
+    radius: Math.min(1, Math.max(0.18, Math.sqrt(dists[i] / max))),
+  }));
 }

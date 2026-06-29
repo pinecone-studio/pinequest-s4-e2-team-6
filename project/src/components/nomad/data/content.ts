@@ -7,8 +7,8 @@ export const navItems: Record<Language, NavItem[]> = {
     { id: "ar", label: "AR", icon: "view_in_ar" },
     { id: "planner", label: "Төлөвлөгч", icon: "event_note" },
     { id: "gems", label: "Далд газрууд", icon: "landscape" },
-    { id: "culture", label: "Соёл", icon: "temple_buddhist" },
     { id: "offline", label: "Офлайн", icon: "cloud_download" },
+    { id: "currency", label: "Валют", icon: "payments" },
     { id: "safety", label: "Аюулгүй", icon: "security" },
   ],
   en: [
@@ -17,8 +17,8 @@ export const navItems: Record<Language, NavItem[]> = {
     { id: "ar", label: "AR", icon: "view_in_ar" },
     { id: "planner", label: "Planner", icon: "event_note" },
     { id: "gems", label: "Hidden gems", icon: "landscape" },
-    { id: "culture", label: "Culture", icon: "temple_buddhist" },
     { id: "offline", label: "Offline", icon: "cloud_download" },
+    { id: "currency", label: "Currency", icon: "payments" },
     { id: "safety", label: "Safety", icon: "security" },
   ],
 };

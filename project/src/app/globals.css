@@ -3,12 +3,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #f4efe6;
-  --foreground: #16130f;
-  --accent: #00658b;
-  --accent-soft: #6bcbff;
-  --accent-2: #7b61ff;
-  --accent-3: #ff8a5b;
+  /* "Land of Eternal Blue Sky": deep sky blue + golden steppe + off-white */
+  --background: #f4eede;
+  --foreground: #161922;
+  --accent: #00658b;       /* deep sky */
+  --accent-soft: #6bcbff;  /* bright sky */
+  --accent-2: #e0a32e;     /* golden autumn steppe */
+  --accent-3: #ef7d3a;     /* golden-hour sun */
   --mint: #34e0a1;
 }
 
@@ -20,8 +21,8 @@
 }
 
 .dark {
-  --background: #080b0d;
-  --foreground: #f3efe8;
+  --background: #08111c; /* night over the steppe */
+  --foreground: #f3efe6;
 }
 
 body {
@@ -116,7 +117,7 @@ html {
   color: transparent;
 }
 .dark .text-gradient {
-  background: linear-gradient(115deg, var(--accent-soft) 0%, #b9a7ff 52%, var(--accent-3) 100%);
+  background: linear-gradient(115deg, var(--accent-soft) 0%, #f0c66a 52%, var(--accent-3) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -142,11 +143,41 @@ html {
 @keyframes shimmer {
   to { background-position: 200% center; }
 }
+@keyframes pulse-ring {
+  0% { transform: scale(0.85); opacity: 0.7; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.25; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
+}
+@keyframes spin360 { to { transform: rotate(360deg); } }
+/* Slow cinematic zoom/pan for the hero — gives a still photo a film feel */
+@keyframes kenburns {
+  0% { transform: scale(1.08) translate3d(-1.5%, 1.5%, 0); }
+  100% { transform: scale(1.22) translate3d(1.5%, -1.5%, 0); }
+}
 .animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
 .animate-float { animation: float 6s ease-in-out infinite; }
+.animate-radar { transform-origin: center; animation: spin360 3.6s linear infinite; }
+.animate-kenburns { animation: kenburns 26s ease-in-out infinite alternate; }
+.animate-spin-slow { animation: spin360 9s linear infinite; }
 .delay-1 { animation-delay: 0.08s; }
 .delay-2 { animation-delay: 0.16s; }
 .delay-3 { animation-delay: 0.24s; }
+
+/* Glowing ring that radiates out from the AI advisor avatar */
+.pulse-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--accent-soft);
+  animation: pulse-ring 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  z-index: -1;
+}
+.typing-dot { animation: blink 1.2s infinite both; }
 
 /* ---- Chrome ----------------------------------------------------------- */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
@@ -158,6 +189,7 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aurora-blob, .animate-float, .animate-fade-up { animation: none; }
+  .aurora-blob, .animate-float, .animate-fade-up, .animate-kenburns,
+  .animate-spin-slow, .pulse-ring::before, .typing-dot, .animate-radar { animation: none; }
   html { scroll-behavior: auto; }
 }

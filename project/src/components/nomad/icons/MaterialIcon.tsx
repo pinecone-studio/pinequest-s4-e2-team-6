@@ -39,6 +39,8 @@ const iconPaths: Record<string, string> = {
   account_balance: "M12 3 3 8v2h18V8l-9-5ZM5 11v7H3v2h18v-2h-2v-7h-2v7h-3v-7h-4v7H7v-7H5Z",
   call: "M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11.5 11.5 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.4a1 1 0 0 1 1 1 11.5 11.5 0 0 0 .6 3.6 1 1 0 0 1-.2 1l-2.2 2.2Z",
   sos: "M4 7h16v10H4V7Zm3 3v4h2v-1h1v1h2v-4H7Zm2 1.5h1v1H9v-1Zm4.5-1.5a2 2 0 0 0 0 4H15a2 2 0 0 0 0-4h-1.5Zm0 1.5H15a.5.5 0 0 1 0 1h-1.5a.5.5 0 0 1 0-1Z",
+  close: "M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3 1.4 1.4Z",
+  chat: "M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4V6a2 2 0 0 1 2-2Zm3 5v2h10V9H7Zm0 4v2h7v-2H7Z",
 };
 
 export function MaterialIcon({ name, className = "" }: MaterialIconProps) {
