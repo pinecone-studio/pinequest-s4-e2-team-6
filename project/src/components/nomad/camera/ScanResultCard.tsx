@@ -15,6 +15,7 @@ type Props = {
 export function ScanResultCard({ result, preview, language, onScanAgain }: Props) {
   const t = cameraCopy[language];
   const pct = Math.round(result.confidence * 100);
+  const foundedValue = shouldShowFounded(result.category) ? result.foundedOrBuilt : null;
 
   return (
     <div className="glass-panel mx-auto w-full max-w-md overflow-hidden rounded-[28px]">
@@ -39,6 +40,27 @@ export function ScanResultCard({ result, preview, language, onScanAgain }: Props
 
         {result.description && (
           <p className="leading-7 text-black/68 dark:text-white/68">{result.description}</p>
+        )}
+
+        <div className={`mt-5 grid gap-2 ${foundedValue ? "grid-cols-2" : "grid-cols-1"}`}>
+          {foundedValue && (
+            <MiniFact icon="event_note" label={t.foundedOrBuilt} value={foundedValue} />
+          )}
+          <MiniFact icon="account_balance" label={t.historicalPeriod} value={result.historicalPeriod} />
+        </div>
+
+        <div className="mt-5 space-y-4">
+          <DetailBlock icon="auto_awesome" title={t.significance} text={result.significance} />
+          <DetailBlock icon="event_note" title={t.history} text={result.history} />
+          <DetailBlock icon="landscape" title={t.architectureOrNature} text={result.architectureOrNature} />
+        </div>
+
+        {result.facts.length > 0 && (
+          <ListBlock icon="check_circle" title={t.facts} items={result.facts} />
+        )}
+
+        {result.visitorTips.length > 0 && (
+          <ListBlock icon="directions_walk" title={t.visitorTips} items={result.visitorTips} />
         )}
 
         <div className="my-4">
@@ -71,5 +93,82 @@ export function ScanResultCard({ result, preview, language, onScanAgain }: Props
         </button>
       </div>
     </div>
+  );
+}
+
+function MiniFact({
+  icon,
+  label,
+  value,
+}: {
+  icon: string;
+  label: string;
+  value: string;
+}) {
+  if (!value) return null;
+
+  return (
+    <div className="rounded-2xl bg-black/5 p-3 dark:bg-white/10">
+      <p className="mb-1 flex items-center gap-1 text-[10px] font-black uppercase tracking-[0] text-black/45 dark:text-white/45">
+        <MaterialIcon name={icon} className="size-[13px]" />
+        {label}
+      </p>
+      <p className="text-sm font-black leading-5 tracking-[0]">{value}</p>
+    </div>
+  );
+}
+
+function shouldShowFounded(category: string): boolean {
+  return ["building", "museum", "monument", "temple", "historic_site"].includes(category);
+}
+
+function DetailBlock({
+  icon,
+  title,
+  text,
+}: {
+  icon: string;
+  title: string;
+  text: string;
+}) {
+  if (!text) return null;
+
+  return (
+    <section>
+      <h3 className="mb-1 flex items-center gap-2 text-xs font-black uppercase tracking-[0] text-black/55 dark:text-white/55">
+        <MaterialIcon name={icon} className="size-[15px]" />
+        {title}
+      </h3>
+      <p className="text-sm leading-6 text-black/68 dark:text-white/68">{text}</p>
+    </section>
+  );
+}
+
+function ListBlock({
+  icon,
+  title,
+  items,
+}: {
+  icon: string;
+  title: string;
+  items: string[];
+}) {
+  return (
+    <section className="mt-5">
+      <h3 className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-[0] text-black/55 dark:text-white/55">
+        <MaterialIcon name={icon} className="size-[15px]" />
+        {title}
+      </h3>
+      <ul className="space-y-2">
+        {items.map((item) => (
+          <li
+            key={item}
+            className="rounded-2xl bg-black/5 px-3 py-2 text-sm leading-6 text-black/68 dark:bg-white/10 dark:text-white/68"
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }

@@ -6,12 +6,21 @@ type CameraStrings = {
   start: string;
   starting: string;
   capture: string;
+  switchCamera: string;
   capturing: string;
   recognizing: string;
   saving: string;
   retake: string;
   scanAgain: string;
   confidence: string;
+  foundedOrBuilt: string;
+  historicalPeriod: string;
+  significance: string;
+  history: string;
+  architectureOrNature: string;
+  facts: string;
+  visitorTips: string;
+  deleteScan: string;
   historyTitle: string;
   historyEmpty: string;
   hint: string;
@@ -25,12 +34,21 @@ export const cameraCopy: Record<Language, CameraStrings> = {
     start: "Камер нээх",
     starting: "Камер ачааллаж байна…",
     capture: "Таних",
+    switchCamera: "Камер солих",
     capturing: "Зураг авч байна…",
-    recognizing: "AI танаж байна…",
+    recognizing: "AI таньж байна…",
     saving: "Хадгалж байна…",
     retake: "Дахин авах",
     scanAgain: "Дахин таних",
     confidence: "Итгэлцэл",
+    foundedOrBuilt: "Үүссэн / баригдсан",
+    historicalPeriod: "Түүхэн үе",
+    significance: "Утга учир",
+    history: "Түүхэн мэдээлэл",
+    architectureOrNature: "Онцлог шинж",
+    facts: "Сонирхолтой баримт",
+    visitorTips: "Аялагчийн зөвлөгөө",
+    deleteScan: "Устгах",
     historyTitle: "Таны таньсан газрууд",
     historyEmpty: "Одоохондоо таньсан зүйл алга. Эхний зургаа аваарай.",
     hint: "Объектыг хүрээнд багтаан тогтоож барина уу.",
@@ -50,12 +68,21 @@ export const cameraCopy: Record<Language, CameraStrings> = {
     start: "Open camera",
     starting: "Starting camera…",
     capture: "Identify",
+    switchCamera: "Switch camera",
     capturing: "Capturing…",
     recognizing: "AI is recognising…",
     saving: "Saving…",
     retake: "Retake",
     scanAgain: "Scan again",
     confidence: "Confidence",
+    foundedOrBuilt: "Founded / built",
+    historicalPeriod: "Historical period",
+    significance: "Why it matters",
+    history: "Historical background",
+    architectureOrNature: "Visible features",
+    facts: "Notable facts",
+    visitorTips: "Visitor tips",
+    deleteScan: "Delete",
     historyTitle: "Places you have scanned",
     historyEmpty: "Nothing scanned yet. Capture your first photo.",
     hint: "Frame the subject and hold steady.",

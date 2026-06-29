@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
 import { captureFrame } from "./captureFrame";
 import { getDeviceId } from "./deviceId";
@@ -23,20 +23,22 @@ import type {
  */
 export function useScanner(language: Language) {
   const camera = useCamera();
-  const { scans, loading, save, refresh } = useScans();
+  const { scans, loading, save, refresh, deleteScan } = useScans();
 
   const [phase, setPhase] = useState<ScanPhase>("idle");
   const [error, setError] = useState<ScannerError | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [result, setResult] = useState<Recognition | null>(null);
   const busy = useRef(false);
+  const lastCoords = useRef<Coords>(null);
+  const resultLanguage = useRef<Language>(language);
 
   const open = useCallback(async () => {
     setError(null);
     setPhase("starting");
-    await camera.start();
-    setPhase(camera.error ? "error" : "live");
-    if (camera.error) setError(camera.error);
+    const cameraError = await camera.start();
+    setPhase(cameraError ? "error" : "live");
+    if (cameraError) setError(cameraError);
   }, [camera]);
 
   const reset = useCallback(() => {
@@ -45,6 +47,15 @@ export function useScanner(language: Language) {
     setError(null);
     setPhase(camera.ready ? "live" : "idle");
   }, [camera.ready]);
+
+  const switchCamera = useCallback(async () => {
+    if (busy.current) return;
+    setError(null);
+    setPhase("starting");
+    const cameraError = await camera.switchCamera();
+    setPhase(cameraError ? "error" : "live");
+    if (cameraError) setError(cameraError);
+  }, [camera]);
 
   // Persisting is best-effort: a recognised landmark is still shown to the user
   // even if Storage/DB writes fail, so a backend hiccup never blocks the demo.
@@ -74,7 +85,9 @@ export function useScanner(language: Language) {
 
       setPhase("recognizing");
       const coords: Coords = await getCoords();
+      lastCoords.current = coords;
       const rec = await recognize({ dataUrl: shot.dataUrl, language, coords });
+      resultLanguage.current = language;
       setResult(rec);
 
       await persist(rec, shot.blob, coords);
@@ -87,6 +100,29 @@ export function useScanner(language: Language) {
     }
   }, [camera.videoRef, language, persist]);
 
+  useEffect(() => {
+    if (!preview || !result || resultLanguage.current === language || busy.current) return;
+
+    let cancelled = false;
+    busy.current = true;
+    recognize({ dataUrl: preview, language, coords: lastCoords.current })
+      .then((rec) => {
+        if (cancelled) return;
+        resultLanguage.current = language;
+        setResult(rec);
+      })
+      .catch(() => {
+        if (!cancelled) setError("ai");
+      })
+      .finally(() => {
+        busy.current = false;
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [language, preview, result]);
+
   return {
     phase,
     error,
@@ -95,11 +131,15 @@ export function useScanner(language: Language) {
     scans,
     historyLoading: loading,
     videoRef: camera.videoRef,
+    setVideoRef: camera.setVideoRef,
     cameraReady: camera.ready,
+    facingMode: camera.facingMode,
     open,
     shoot,
     reset,
     refresh,
+    switchCamera,
+    deleteScan,
   };
 }
 

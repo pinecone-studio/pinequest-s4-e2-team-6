@@ -7,7 +7,10 @@ type CameraState = {
   ready: boolean;
   starting: boolean;
   error: ScannerError | null;
+  facingMode: CameraFacingMode;
 };
+
+export type CameraFacingMode = "environment" | "user";
 
 /**
  * Manages a live `getUserMedia` stream bound to a <video> element.
@@ -19,46 +22,87 @@ type CameraState = {
 export function useCamera() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  const facingModeRef = useRef<CameraFacingMode>("environment");
   const [state, setState] = useState<CameraState>({
     ready: false,
     starting: false,
     error: null,
+    facingMode: "environment",
   });
 
-  const stop = useCallback(() => {
+  const attachStream = useCallback(async () => {
+    const video = videoRef.current;
+    const stream = streamRef.current;
+    if (!video || !stream) return;
+
+    if (video.srcObject !== stream) {
+      video.srcObject = stream;
+    }
+
+    await video.play().catch(() => undefined);
+  }, []);
+
+  const stopTracks = useCallback(() => {
     streamRef.current?.getTracks().forEach((t) => t.stop());
     streamRef.current = null;
     if (videoRef.current) videoRef.current.srcObject = null;
-    setState({ ready: false, starting: false, error: null });
   }, []);
 
-  const start = useCallback(async () => {
-    if (streamRef.current) return;
+  const stop = useCallback(() => {
+    stopTracks();
+    setState((current) => ({ ...current, ready: false, starting: false, error: null }));
+  }, [stopTracks]);
+
+  const setVideoRef = useCallback(
+    (node: HTMLVideoElement | null) => {
+      videoRef.current = node;
+      if (node) void attachStream();
+    },
+    [attachStream],
+  );
+
+  const start = useCallback(async (nextFacingMode = facingModeRef.current): Promise<ScannerError | null> => {
+    if (streamRef.current) {
+      await attachStream();
+      return null;
+    }
     if (!navigator.mediaDevices?.getUserMedia) {
-      setState({ ready: false, starting: false, error: "no-camera" });
-      return;
+      setState((current) => ({ ...current, ready: false, starting: false, error: "no-camera" }));
+      return "no-camera";
     }
 
-    setState({ ready: false, starting: true, error: null });
+    setState((current) => ({ ...current, ready: false, starting: true, error: null }));
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { ideal: "environment" }, width: { ideal: 1920 } },
+        video: { facingMode: { ideal: nextFacingMode }, width: { ideal: 1920 } },
         audio: false,
       });
       streamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play().catch(() => undefined);
-      }
-      setState({ ready: true, starting: false, error: null });
+      facingModeRef.current = nextFacingMode;
+      await attachStream();
+      setState({ ready: true, starting: false, error: null, facingMode: nextFacingMode });
+      return null;
     } catch (err) {
-      setState({ ready: false, starting: false, error: classify(err) });
+      const error = classify(err);
+      setState((current) => ({ ...current, ready: false, starting: false, error }));
+      return error;
     }
-  }, []);
+  }, [attachStream]);
+
+  const switchCamera = useCallback(async (): Promise<ScannerError | null> => {
+    const nextFacingMode: CameraFacingMode =
+      facingModeRef.current === "environment" ? "user" : "environment";
+    stopTracks();
+    return start(nextFacingMode);
+  }, [start, stopTracks]);
+
+  useEffect(() => {
+    if (state.ready) void attachStream();
+  }, [attachStream, state.ready]);
 
   useEffect(() => stop, [stop]);
 
-  return { videoRef, start, stop, ...state };
+  return { videoRef, setVideoRef, start, stop, switchCamera, ...state };
 }
 
 function classify(err: unknown): ScannerError {

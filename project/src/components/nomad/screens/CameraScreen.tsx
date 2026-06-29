@@ -39,10 +39,11 @@ export function CameraScreen({ language }: CameraScreenProps) {
           />
         ) : showViewport ? (
           <CameraViewport
-            videoRef={s.videoRef}
+            setVideoRef={s.setVideoRef}
             phase={s.phase}
             language={language}
             onCapture={s.shoot}
+            onSwitchCamera={s.switchCamera}
           />
         ) : (
           <PermissionState
@@ -59,7 +60,12 @@ export function CameraScreen({ language }: CameraScreenProps) {
           </p>
         )}
 
-        <ScanHistory scans={s.scans} loading={s.historyLoading} language={language} />
+        <ScanHistory
+          scans={s.scans}
+          loading={s.historyLoading}
+          language={language}
+          onDelete={s.deleteScan}
+        />
       </section>
     </ScreenFrame>
   );
