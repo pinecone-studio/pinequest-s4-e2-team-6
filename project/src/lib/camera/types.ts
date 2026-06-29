@@ -6,6 +6,13 @@ export type Recognition = {
   location: string;
   category: string;
   description: string;
+  foundedOrBuilt: string | null;
+  historicalPeriod: string;
+  significance: string;
+  history: string;
+  architectureOrNature: string;
+  facts: string[];
+  visitorTips: string[];
   confidence: number; // 0..1
   tags: string[];
   distanceKm?: number | null;

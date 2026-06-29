@@ -1,7 +1,7 @@
 # AI камер — тохиргоо (Supabase талд хийх зүйлс)
 
 AI камер дэлгэц нь жинхэнэ камер нээж, зураг авч, OpenAI Vision-оор
-танаж, үр дүнг **Supabase**-д хадгалдаг. Кодыг бүрэн бичсэн — чи зөвхөн
+таньж, үр дүнг **Supabase**-д хадгалдаг. Кодыг бүрэн бичсэн — чи зөвхөн
 доорх 2 алхмыг Supabase дээр хийнэ.
 
 ## 1. SQL ажиллуулах
@@ -12,7 +12,7 @@ Supabase Dashboard → **SQL Editor** → **New query** руу ороод
 
 - `public.scans` хүснэгт үүсгэнэ (таньсан газар бүрийн мэдээлэл),
 - хурдан хайлтын индекс нэмнэ,
-- RLS (row level security) бодлого тавина (анонимаар унших/нэмэх),
+- RLS (row level security) бодлого тавина (анонимаар унших/нэмэх/history устгах),
 - `scans` нэртэй **Storage bucket** (public) үүсгэж зургийн бодлого тавина.
 
 ## 2. .env шалгах
@@ -21,6 +21,7 @@ Supabase Dashboard → **SQL Editor** → **New query** руу ороод
 
 ```
 OPENAI_KEY=...                              # сервер талд л ашиглана, нууц
+OPENAI_MODEL=gpt-4o-mini                   # заавал биш, өөр vision model сонгож болно
 NEXT_PUBLIC_SUPABASE_URL=...
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
 ```

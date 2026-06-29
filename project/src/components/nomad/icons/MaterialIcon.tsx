@@ -7,6 +7,8 @@ type MaterialIconProps = {
 const iconPaths: Record<string, string> = {
   explore: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm3.8 6.2-2.1 5.5-5.5 2.1 2.1-5.5 5.5-2.1Z",
   photo_camera: "M4 8.5A2.5 2.5 0 0 1 6.5 6H9l1.4-2h3.2L15 6h2.5A2.5 2.5 0 0 1 20 8.5v8A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5v-8Zm8 7.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z",
+  flip_camera_ios: "M20 5h-3.2l-1.6-2H8.8L7.2 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2ZM9 8h6.2l-1.8-1.8L14.8 4.8 19 9l-4.2 4.2-1.4-1.4L15.2 10H9V8Zm6 9H8.8l1.8 1.8-1.4 1.4L5 16l4.2-4.2 1.4 1.4L8.8 15H15v2Z",
+  delete: "M7 21a2 2 0 0 1-2-2V7h14v12a2 2 0 0 1-2 2H7ZM9 4l1-1h4l1 1h4v2H5V4h4Zm0 6v7h2v-7H9Zm4 0v7h2v-7h-2Z",
   view_in_ar: "M12 2 4 6v12l8 4 8-4V6l-8-4Zm0 2.2 5.4 2.7L12 9.6 6.6 6.9 12 4.2ZM6 8.5l5 2.5v7.8l-5-2.5V8.5Zm7 10.3V11l5-2.5v7.8l-5 2.5Z",
   event_note: "M7 2h2v2h6V2h2v2h2a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2V2Zm12 8H5v9h14v-9ZM7 12h8v2H7v-2Zm0 4h5v2H7v-2Z",
   landscape: "M3 19h18L14 8l-4.5 6L7 11 3 19Z",
