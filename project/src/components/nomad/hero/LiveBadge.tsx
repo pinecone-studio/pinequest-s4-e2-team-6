@@ -15,7 +15,7 @@ export function LiveBadge({ language, now }: { language: Language; now: Date }) 
   const weather = useWeather();
   const season = seasonNow(language, now);
   const gem = featuredGem(language, now);
-  const todayLabel = language === "mn" ? "Өнөөдрийн онгод" : "Today's gem";
+  const todayLabel = language === "mn" ? "Координат" : "Coordinates";
 
   return (
     <div className="flex flex-wrap items-center justify-center gap-2">

@@ -1,5 +1,6 @@
 import { copy } from "@/components/nomad/data/content";
 import type { Language } from "@/components/nomad/types";
+import { gems } from "@/lib/gems/seed";
 
 /** Day-of-year so the featured gem rotates once per day — the site feels alive. */
 function dayOfYear(d: Date): number {
@@ -11,7 +12,9 @@ function dayOfYear(d: Date): number {
 export function featuredGem(language: Language, now: Date) {
   const items = copy[language].gems.items;
   const [title, region] = items[dayOfYear(now) % items.length];
-  return { title, region };
+  const gem = gems.find((g) => (language === "mn" ? g.nameMn : g.nameEn) === title);
+  const displayTitle = gem ? `${gem.lat.toFixed(2)}, ${gem.lng.toFixed(2)}` : title;
+  return { title: displayTitle, region };
 }
 
 const SEASONS = {
