@@ -12,7 +12,7 @@ export type Coords = { lat: number; lng: number } | null;
 /**
  * Merges bundled curated places, the Supabase PostGIS RPC and Google results,
  * resolves each against the user's live position (distance + bearing), and
- * keeps only those within 10 km — sorted nearest first. Works offline / without
+ * keeps only those within 300 km — sorted nearest first. Works offline / without
  * Google on the bundled curated data alone.
  */
 export function usePlaces(coords: Coords) {

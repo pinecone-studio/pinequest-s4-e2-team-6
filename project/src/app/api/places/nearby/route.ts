@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
-import type { PlaceCategory } from "@/lib/places/types";
+import { RADIUS_M, type PlaceCategory } from "@/lib/places/types";
 
 export const runtime = "nodejs";
 
 const ENDPOINT = "https://places.googleapis.com/v1/places:searchNearby";
+const GOOGLE_RADIUS_M = Math.min(RADIUS_M, 50_000);
 const TYPE_CATEGORY: Record<string, PlaceCategory> = {
   restaurant: "RESTAURANT",
   supermarket: "GROCERY",
@@ -46,8 +47,8 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         includedTypes: Object.keys(TYPE_CATEGORY),
-        maxResultCount: 15,
-        locationRestriction: { circle: { center: { latitude: lat, longitude: lng }, radius: 8000 } },
+        maxResultCount: 20,
+        locationRestriction: { circle: { center: { latitude: lat, longitude: lng }, radius: GOOGLE_RADIUS_M } },
       }),
     });
     if (!res.ok) return NextResponse.json({ places: [] });

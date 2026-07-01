@@ -1,5 +1,5 @@
 import { getSupabase, isSupabaseConfigured } from "@/lib/supabase/client";
-import type { Place, PlaceCategory } from "./types";
+import { RADIUS_M, type Place, type PlaceCategory } from "./types";
 
 type Row = {
   id: string;
@@ -17,7 +17,7 @@ export async function fetchSupabase(lat: number, lng: number): Promise<Place[]> 
     const { data, error } = await getSupabase().rpc("nearby_places", {
       user_lat: lat,
       user_lng: lng,
-      radius_m: 10000,
+      radius_m: RADIUS_M,
     });
     if (error || !data) return [];
     return (data as Row[]).map((r) => ({
