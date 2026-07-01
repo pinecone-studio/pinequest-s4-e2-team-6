@@ -11,7 +11,7 @@ type Props = {
   onPick: (code: string) => void;
 };
 
-/** Live table: 1 unit of each currency expressed in MNT. Tap a row to convert. */
+
 export function RateTable({ convert, active, language, onPick }: Props) {
   const t = currencyCopy[language];
 

@@ -6,7 +6,13 @@ import { copy, languageOptions, navItems } from "../data/content";
 import { MaterialIcon } from "../icons/MaterialIcon";
 import type { Language, NavItem, ScreenId } from "../types";
 
-const MAIN_NAV_IDS: ScreenId[] = ["discover", "camera", "ar", "planner", "offline"];
+const MAIN_NAV_IDS: ScreenId[] = [
+  "discover",
+  "camera",
+  "ar",
+  "planner",
+  "offline",
+];
 const SIDE_NAV_IDS: ScreenId[] = ["gems", "currency", "safety"];
 
 type AppShellProps = {
@@ -16,10 +22,19 @@ type AppShellProps = {
   setLanguage: (language: Language) => void;
 };
 
-export function AppShell({ active, setActive, language, setLanguage }: AppShellProps) {
+export function AppShell({
+  active,
+  setActive,
+  language,
+  setLanguage,
+}: AppShellProps) {
   const items = navItems[language];
-  const mainItems = MAIN_NAV_IDS.map((id) => items.find((item) => item.id === id)).filter((item): item is NavItem => Boolean(item));
-  const sideItems = SIDE_NAV_IDS.map((id) => items.find((item) => item.id === id)).filter((item): item is NavItem => Boolean(item));
+  const mainItems = MAIN_NAV_IDS.map((id) =>
+    items.find((item) => item.id === id),
+  ).filter((item): item is NavItem => Boolean(item));
+  const sideItems = SIDE_NAV_IDS.map((id) =>
+    items.find((item) => item.id === id),
+  ).filter((item): item is NavItem => Boolean(item));
   const text = copy[language];
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
@@ -37,7 +52,9 @@ export function AppShell({ active, setActive, language, setLanguage }: AppShellP
               aria-label={language === "mn" ? "Нэмэлт цэс нээх" : "Open menu"}
               aria-expanded={sidebarOpen}
               className={`grid size-9 place-items-center rounded-full border border-black/10 bg-white/50 text-black/60 backdrop-blur-xl transition hover:bg-black/5 dark:border-white/10 dark:bg-white/5 dark:text-white/65 dark:hover:bg-white/10 sm:size-10 ${
-                sideActive ? "text-[#00658b] ring-2 ring-[#00658b]/25 dark:text-[#6bcbff] dark:ring-[#6bcbff]/25" : ""
+                sideActive
+                  ? "text-[#00658b] ring-2 ring-[#00658b]/25 dark:text-[#6bcbff] dark:ring-[#6bcbff]/25"
+                  : ""
               }`}
             >
               <MaterialIcon name="menu" className="size-5" />
@@ -52,7 +69,6 @@ export function AppShell({ active, setActive, language, setLanguage }: AppShellP
             </button>
           </div>
 
-          {/* Desktop nav */}
           <nav className="hidden items-center gap-0.5 rounded-full border border-black/10 bg-white/50 p-1 backdrop-blur-xl dark:border-white/10 dark:bg-white/5 lg:flex">
             {mainItems.map((item) => (
               <button
@@ -201,7 +217,10 @@ function SideDrawer({
               >
                 <MaterialIcon name={item.icon} className="size-5" />
                 <span className="min-w-0 flex-1 truncate">{item.label}</span>
-                <MaterialIcon name="chevron_right" className={`size-4 transition ${on ? "translate-x-0.5" : ""}`} />
+                <MaterialIcon
+                  name="chevron_right"
+                  className={`size-4 transition ${on ? "translate-x-0.5" : ""}`}
+                />
               </button>
             );
           })}
@@ -250,7 +269,10 @@ function BottomNav({
                 : "text-black/50 dark:text-white/55"
             }`}
           >
-            <MaterialIcon name={item.icon} className={`size-5 transition ${on ? "scale-110" : ""}`} />
+            <MaterialIcon
+              name={item.icon}
+              className={`size-5 transition ${on ? "scale-110" : ""}`}
+            />
             <span className="max-w-full truncate text-[9px] font-black uppercase tracking-tight">
               {item.label}
             </span>
