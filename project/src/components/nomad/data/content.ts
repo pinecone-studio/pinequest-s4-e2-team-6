@@ -487,7 +487,8 @@ export const copy = {
     discover: {
       badge: "AI 验证的旅行体验",
       title: "用 AI 探索蒙古。",
-      description: "把相机识别、AR 导航、离线地图、智能路线和文化建议集中在一个蒙古旅行助手里。",
+      description:
+        "把相机识别、AR 导航、离线地图、智能路线和文化建议集中在一个蒙古旅行助手里。",
       primaryCta: "开始探索",
       secondaryCta: "查看演示",
     },
@@ -495,7 +496,8 @@ export const copy = {
       title: "龟石",
       location: "特勒吉，蒙古",
       badge: "AI 已验证",
-      description: "这座花岗岩地貌根植于蒙古传说，像山谷守护者一样矗立，将自然风光与文化故事连接起来。",
+      description:
+        "这座花岗岩地貌根植于蒙古传说，像山谷守护者一样矗立，将自然风光与文化故事连接起来。",
       distance: "1.2 公里",
       time: "15 分钟",
       actions: ["聆听", "翻译", "保存"],
@@ -519,9 +521,27 @@ export const copy = {
       costLabel: "预计花费",
       startRoute: "开始路线",
       stops: [
-        ["10:00", "蒙古国家博物馆", "快速了解历史与民族志展品。", "1.5 小时", "15,000₮"],
-        ["11:45", "午餐：Zochin cafe", "附近适合预算的呼舒尔和奶茶选择。", "1 小时", "12,000₮"],
-        ["13:00", "苏赫巴托广场", "市中心建筑与广角拍照点。", "45 分钟", "免费"],
+        [
+          "10:00",
+          "蒙古国家博物馆",
+          "快速了解历史与民族志展品。",
+          "1.5 小时",
+          "15,000₮",
+        ],
+        [
+          "11:45",
+          "午餐：Zochin cafe",
+          "附近适合预算的呼舒尔和奶茶选择。",
+          "1 小时",
+          "12,000₮",
+        ],
+        [
+          "13:00",
+          "苏赫巴托广场",
+          "市中心建筑与广角拍照点。",
+          "45 分钟",
+          "免费",
+        ],
       ],
     },
     gems: {
@@ -530,7 +550,12 @@ export const copy = {
       items: [
         ["哈吉因哈尔湖", "中央省", "可骑马或徒步抵达的安静湖泊。", "9.8"],
         ["八湖", "前杭爱", "适合观星的火山湖区。", "9.5"],
-        ["巴嘎嘎兹林楚鲁", "中戈壁", "花岗岩地貌，短途自驾的轻松停靠点。", "9.1"],
+        [
+          "巴嘎嘎兹林楚鲁",
+          "中戈壁",
+          "花岗岩地貌，短途自驾的轻松停靠点。",
+          "9.1",
+        ],
         ["特勒吉龟石", "中央省", "以传说、自然地貌和摄影闻名。", "9.4"],
       ],
     },
@@ -581,7 +606,8 @@ export const copy = {
     discover: {
       badge: "AI-проверенный туристический опыт",
       title: "Откройте Монголию с AI.",
-      description: "Помощник для путешествий по Монголии: распознавание камерой, AR-навигация, офлайн-карты, умные маршруты и советы по культуре.",
+      description:
+        "Помощник для путешествий по Монголии: распознавание камерой, AR-навигация, офлайн-карты, умные маршруты и советы по культуре.",
       primaryCta: "Начать обзор",
       secondaryCta: "Смотреть демо",
     },
@@ -589,7 +615,8 @@ export const copy = {
       title: "Скала Черепаха",
       location: "Тэрэлж, Монголия",
       badge: "Проверено AI",
-      description: "Гранитное образование из монгольских легенд возвышается как хранитель долины, соединяя природу и культурную историю.",
+      description:
+        "Гранитное образование из монгольских легенд возвышается как хранитель долины, соединяя природу и культурную историю.",
       distance: "1.2 км",
       time: "15 мин",
       actions: ["Слушать", "Перевести", "Сохранить"],
@@ -606,26 +633,65 @@ export const copy = {
       prompt: '"Сегодня у меня бюджет 50,000₮ и 6 свободных часов."',
       badge: "План AI Nomad",
       title: "Улан-Батор экспресс: культура и еда",
-      description: "Короткий 6-часовой маршрут с пешими переходами и общественным транспортом, чтобы уложиться в бюджет.",
+      description:
+        "Короткий 6-часовой маршрут с пешими переходами и общественным транспортом, чтобы уложиться в бюджет.",
       durationValue: "5.5 ч",
       durationLabel: "примерное время",
       costValue: "42k ₮",
       costLabel: "примерная стоимость",
       startRoute: "Начать маршрут",
       stops: [
-        ["10:00", "Национальный музей Монголии", "Краткий обзор истории и этнографических экспонатов.", "1.5 ч", "15,000₮"],
-        ["11:45", "Обед: Zochin cafe", "Бюджетный вариант рядом: хушуур и чай с молоком.", "1 ч", "12,000₮"],
-        ["13:00", "Площадь Сухэ-Батора", "Архитектура и широкие городские кадры в центре.", "45 мин", "Бесплатно"],
+        [
+          "10:00",
+          "Национальный музей Монголии",
+          "Краткий обзор истории и этнографических экспонатов.",
+          "1.5 ч",
+          "15,000₮",
+        ],
+        [
+          "11:45",
+          "Обед: Zochin cafe",
+          "Бюджетный вариант рядом: хушуур и чай с молоком.",
+          "1 ч",
+          "12,000₮",
+        ],
+        [
+          "13:00",
+          "Площадь Сухэ-Батора",
+          "Архитектура и широкие городские кадры в центре.",
+          "45 мин",
+          "Бесплатно",
+        ],
       ],
     },
     gems: {
       eyebrow: "Скрытые места",
       title: "Места вдали от толп",
       items: [
-        ["Озеро Хагийн Хар", "Тув аймак", "Тихое озеро, куда добираются верхом или пешком.", "9.8"],
-        ["Восемь озер", "Уверхангай", "Вулканический озерный район, отличный для наблюдения за звездами.", "9.5"],
-        ["Бага газрын чулуу", "Дундговь", "Гранитные скалы и удобная остановка для короткого road trip.", "9.1"],
-        ["Скала Черепаха в Тэрэлже", "Тув аймак", "Известное место для легенд, природных форм и фотографий.", "9.4"],
+        [
+          "Озеро Хагийн Хар",
+          "Тув аймак",
+          "Тихое озеро, куда добираются верхом или пешком.",
+          "9.8",
+        ],
+        [
+          "Восемь озер",
+          "Уверхангай",
+          "Вулканический озерный район, отличный для наблюдения за звездами.",
+          "9.5",
+        ],
+        [
+          "Бага газрын чулуу",
+          "Дундговь",
+          "Гранитные скалы и удобная остановка для короткого road trip.",
+          "9.1",
+        ],
+        [
+          "Скала Черепаха в Тэрэлже",
+          "Тув аймак",
+          "Известное место для легенд, природных форм и фотографий.",
+          "9.4",
+        ],
       ],
     },
     culture: {
@@ -635,9 +701,17 @@ export const copy = {
       ruleLabel: "Главное правило",
       rule: "К обо, храмам и семейным гэр подходите спокойно и уважительно, обычно с правой стороны.",
       doTitle: "Можно",
-      doItems: ["Поздороваться и спросить разрешение", "Говорить тихо", "Спросить перед фото"],
+      doItems: [
+        "Поздороваться и спросить разрешение",
+        "Говорить тихо",
+        "Спросить перед фото",
+      ],
       dontTitle: "Нельзя",
-      dontItems: ["Наступать на обо", "Оставлять мусор", "Указывать рукой на святыни"],
+      dontItems: [
+        "Наступать на обо",
+        "Оставлять мусор",
+        "Указывать рукой на святыни",
+      ],
     },
     offline: {
       eyebrow: "Офлайн-центр",
@@ -655,7 +729,8 @@ export const copy = {
     safety: {
       badge: "Проверенная зона безопасности",
       title: "Центр безопасности",
-      description: "Передача геопозиции, офлайн-инструкции, ближайшие больницы, полиция и кнопка SOS в одном месте.",
+      description:
+        "Передача геопозиции, офлайн-инструкции, ближайшие больницы, полиция и кнопка SOS в одном месте.",
       shareTitle: "Поделиться местоположением",
       shareMeta: "Ссылка live tracking",
       guideTitle: "Офлайн-гид",
@@ -675,7 +750,8 @@ export const copy = {
     discover: {
       badge: "Experiencia de viaje verificada por AI",
       title: "Descubre Mongolia con AI.",
-      description: "Un asistente para viajar por Mongolia con reconocimiento de camara, guia AR, mapas sin conexion, rutas inteligentes y consejos culturales.",
+      description:
+        "Un asistente para viajar por Mongolia con reconocimiento de camara, guia AR, mapas sin conexion, rutas inteligentes y consejos culturales.",
       primaryCta: "Empezar a explorar",
       secondaryCta: "Ver demo",
     },
@@ -683,7 +759,8 @@ export const copy = {
       title: "Roca Tortuga",
       location: "Terelj, Mongolia",
       badge: "Verificado por AI",
-      description: "Una formacion de granito arraigada en la leyenda mongola. Se eleva como guardiana del valle y une paisaje natural con historia cultural.",
+      description:
+        "Una formacion de granito arraigada en la leyenda mongola. Se eleva como guardiana del valle y une paisaje natural con historia cultural.",
       distance: "1.2 km",
       time: "15 min",
       actions: ["Escuchar", "Traducir", "Guardar"],
@@ -700,26 +777,65 @@ export const copy = {
       prompt: '"Hoy tengo un presupuesto de 50,000₮ y 6 horas libres."',
       badge: "Plan AI Nomad",
       title: "Ulaanbaatar express: cultura y comida",
-      description: "Una ruta corta de 6 horas que usa caminatas y transporte publico para cuidar el presupuesto.",
+      description:
+        "Una ruta corta de 6 horas que usa caminatas y transporte publico para cuidar el presupuesto.",
       durationValue: "5.5 h",
       durationLabel: "tiempo estimado",
       costValue: "42k ₮",
       costLabel: "costo estimado",
       startRoute: "Iniciar ruta",
       stops: [
-        ["10:00", "Museo Nacional de Mongolia", "Un vistazo rapido a la historia y exhibiciones etnograficas.", "1.5 h", "15,000₮"],
-        ["11:45", "Almuerzo: Zochin cafe", "Una opcion cercana y economica para khuushuur y te con leche.", "1 h", "12,000₮"],
-        ["13:00", "Plaza Sukhbaatar", "Arquitectura y buenos angulos para fotos en el centro.", "45 min", "Gratis"],
+        [
+          "10:00",
+          "Museo Nacional de Mongolia",
+          "Un vistazo rapido a la historia y exhibiciones etnograficas.",
+          "1.5 h",
+          "15,000₮",
+        ],
+        [
+          "11:45",
+          "Almuerzo: Zochin cafe",
+          "Una opcion cercana y economica para khuushuur y te con leche.",
+          "1 h",
+          "12,000₮",
+        ],
+        [
+          "13:00",
+          "Plaza Sukhbaatar",
+          "Arquitectura y buenos angulos para fotos en el centro.",
+          "45 min",
+          "Gratis",
+        ],
       ],
     },
     gems: {
       eyebrow: "Joyas ocultas",
       title: "Lugares lejos de las multitudes",
       items: [
-        ["Lago Khagiin Khar", "Provincia de Tuv", "Un lago tranquilo al que se llega a caballo o caminando.", "9.8"],
-        ["Naiman Lake", "Uvurkhangai", "Una region de lagos volcanicos ideal para ver estrellas.", "9.5"],
-        ["Baga Gazriin Chuluu", "Dundgovi", "Rocas de granito y una parada facil para un viaje corto.", "9.1"],
-        ["Roca Tortuga de Terelj", "Provincia de Tuv", "Un lugar famoso por leyendas, formaciones naturales y fotos.", "9.4"],
+        [
+          "Lago Khagiin Khar",
+          "Provincia de Tuv",
+          "Un lago tranquilo al que se llega a caballo o caminando.",
+          "9.8",
+        ],
+        [
+          "Naiman Lake",
+          "Uvurkhangai",
+          "Una region de lagos volcanicos ideal para ver estrellas.",
+          "9.5",
+        ],
+        [
+          "Baga Gazriin Chuluu",
+          "Dundgovi",
+          "Rocas de granito y una parada facil para un viaje corto.",
+          "9.1",
+        ],
+        [
+          "Roca Tortuga de Terelj",
+          "Provincia de Tuv",
+          "Un lugar famoso por leyendas, formaciones naturales y fotos.",
+          "9.4",
+        ],
       ],
     },
     culture: {
@@ -729,9 +845,17 @@ export const copy = {
       ruleLabel: "Regla clave",
       rule: "Acercate a ovoos, templos y gers familiares con calma y respeto, normalmente desde el lado derecho.",
       doTitle: "Haz",
-      doItems: ["Saluda y pide permiso", "Habla en voz baja", "Pregunta antes de tomar fotos"],
+      doItems: [
+        "Saluda y pide permiso",
+        "Habla en voz baja",
+        "Pregunta antes de tomar fotos",
+      ],
       dontTitle: "No hagas",
-      dontItems: ["Pisar un ovoo", "Dejar basura", "Senalar objetos sagrados con la mano"],
+      dontItems: [
+        "Pisar un ovoo",
+        "Dejar basura",
+        "Senalar objetos sagrados con la mano",
+      ],
     },
     offline: {
       eyebrow: "Centro offline",
@@ -749,7 +873,8 @@ export const copy = {
     safety: {
       badge: "Zona de seguridad verificada",
       title: "Centro de seguridad",
-      description: "Compartir ubicacion, guia sin conexion, hospitales cercanos, policia y boton SOS en un solo lugar.",
+      description:
+        "Compartir ubicacion, guia sin conexion, hospitales cercanos, policia y boton SOS en un solo lugar.",
       shareTitle: "Compartir ubicacion",
       shareMeta: "Enlace de seguimiento en vivo",
       guideTitle: "Guia offline",

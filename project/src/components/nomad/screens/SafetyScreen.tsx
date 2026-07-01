@@ -63,49 +63,144 @@ function haversine(lat1: number, lon1: number, lat2: number, lon2: number) {
 export function SafetyScreen({ language }: SafetyScreenProps) {
   const isEn = language === "en";
 
-  const en = {
-    toastLocOff: "Location is turned off or fallback location used.",
-    liveLabel: "Live",
-    locatingLabel: "Locating...",
-    shareBtn: "Share",
-    hospitalSearching: "Searching for nearby hospitals...",
-    firstAidHeading: "First Aid Basics",
-    phrasesHeading: "Emergency Phrases",
-    embassyFindContact: "Find Embassy Contact",
-    sosHoldHint: "Press and hold SOS",
-    sosHolding: "Holding...",
-    sosModalTitle: "Emergency SOS",
-    sosModalSub: "Are you sure?",
-    sosCallGeneral: "Call 103",
-    sosCallGeneralSub: "Emergency ambulance",
-    sosShare: "Share location",
-    sosCancel: "Cancel",
-    firstAidItems: [],
-    phrases: [],
-  };
-
-  const mn = {
-    toastLocOff: "Галт тэрэг эсвэл байршил унтраалтай байна.",
-    liveLabel: "Шууд",
-    locatingLabel: "Байршил тогтоож байна...",
-    shareBtn: "Хуваалцах",
-    hospitalSearching: "Ойрхон эмнэлэг хайж байна...",
-    firstAidHeading: "Түр тусламж",
-    phrasesHeading: "Хэрэгцээт хэллэгүүд",
-    embassyFindContact: "Элчин сайдын яамтай холбогдох",
-    sosHoldHint: "SOS товчлуур дээр удаан дарна уу",
-    sosHolding: "Дуудлага хийж байна...",
-    sosModalTitle: "Яаралтай тусламж дуудах",
-    sosModalSub: "Та итгэлтэй байна уу?",
-    sosCallGeneral: "Шууд залгах",
-    sosCallGeneralSub: "Улсын нэгдсэн дугаар руу холбогдоно",
-    sosShare: "Байршил илгээх",
+  const safetyMn = {
+    badge: "Баталгаажсан аюулгүй бүс",
+    title: "Аюулгүй байдлын төв",
+    description:
+      "Байршлаа шууд хуваалцах, офлайн зөвлөмж, хамгийн ойрхон эмнэлэг, цагдаагийн газар, мөн хамгийн чухал үед дарах нэг товч.",
+    shareBtn: "Байршил хуваалцах",
+    refreshBtn: "Шинэчлэх",
+    locatingLabel: "Байршил тодорхойлж байна",
+    liveLabel: "Таны байршил",
+    fallbackLabel: "Байршил тодорхойгүй",
+    guideTitle: "Офлайн заавар",
+    guideMeta: "Анхны тусламж, хэллэгүүд",
+    firstAidHeading: "Анхны тусламжийн үндэс",
+    phrasesHeading: "Яаралтай тусламжийн хэллэгүүд",
+    firstAidItems: [
+      {
+        title: "Цус алдалт",
+        body: "Даавуугаар шахаж дарна; боломжтой бол шархыг зүрхнээс дээгүүр өргөнө; шархан дотор орсон зүйлийг бүү авч хая.",
+      },
+      {
+        title: "Өндөрлөг / хээрийн нөлөө",
+        body: "Монголын өндөрлөг нутаг 1,300м-с дээш өндөрт байрладаг тул толгой эргэх, дотор муухайрах, амьсгаадах бол амарч, ус уугаад доогуур газар шилжинэ.",
+      },
+      {
+        title: "Даарах",
+        body: "Салхинаас хамгаалагдсан газарт орж, нойтон хувцсаа сольж, эхлээд биеийн төвийг дулаацуулна.",
+      },
+      {
+        title: "Ухаангүй ч амьсгалж байгаа бол",
+        body: "Хажуу тийш нь тавьж, амьсгалын замыг нээлттэй байлгахын тулд толгойг нь бага зэрэг ухраана, дэргэд нь бай.",
+      },
+    ],
+    phrases: [
+      { mn: "Туслаарай!", en: "Tuslaarai! — Help!" },
+      { mn: "Цагдаа дуудаарай!", en: "Tsagdaa duudaarai! — Call the police!" },
+      { mn: "Надад эмч хэрэгтэй", en: "Nadad emch heregtei — I need a doctor" },
+      { mn: "Би өвчтэй байна", en: "Bi uvchtei baina — I'm sick / in pain" },
+      { mn: "Би гэмтсэн", en: "Bi gemtsen — I've been injured" },
+    ],
+    hospitalLabel: "Ойролцоох эмнэлэг",
+    hospitalSearching: "Ойролцоох эмнэлэг хайж байна…",
+    hospitalNone:
+      "Ойролцоо олдсонгүй — 103 руу залгаж түргэн тусламж дуудна уу",
+    policeTitle: "Цагдаагийн газар",
+    policeSearching: "Хамгийн ойрхон газрыг хайж байна…",
+    policeNone: "Ойролцоо олдсонгүй — 102 руу шууд залгана уу",
+    policeLine: "Улсын шугам — 102",
+    embassyTitle: "Таны элчин сайдын яам",
+    embassyMeta:
+      "Иргэншлээ сонгоно уу — ихэнх төлөөлөгчийн газрууд Улаанбаатарт байрладаг.",
+    embassyDirections: "Чиглэл",
+    embassyFindContact: "Холбоо барих",
+    embassyVerified: "Баталгаажсан дугаар",
+    sos: "SOS дарахын тулд удаан дар",
+    sosHoldHint: "Идэвхжүүлэхийн тулд 1.5 секунд дараарай",
+    sosHolding: "Дарсаар байгаарай…",
+    sosModalTitle: "SOS идэвхжлээ",
+    sosModalSub:
+      "Таны байршил бэлэн боллоо. Юу хийхээ сонгоно уу — автоматаар юу ч илгээгдэхгүй.",
+    sosCallGeneral: "105 — ерөнхий яаралтай тусламж",
+    sosCallGeneralSub: "Гал түймэр, цагдаа, түргэн тусламж",
+    sosCallAmbulance: "103 — түргэн тусламж",
+    sosCallAmbulanceSub: "Шууд эмнэлгийн яаралтай шугам",
+    sosShare: "Байршлаа шууд хуваалцах",
     sosCancel: "Цуцлах",
-    firstAidItems: [],
-    phrases: [],
+    toastCopied: "Байршлын линк хуулагдлаа",
+    toastLocOff: "Байршил унтраалттай — Улаанбаатарыг лавлагаа болгож байна",
   };
 
-  const text: any = isEn ? en : mn;
+  const safetyEn = {
+    badge: "Verified safety zone",
+    title: "Safety center",
+    description:
+      "Real-time location sharing, offline survival guidance, the nearest hospital and police station wherever you stand in Mongolia, and one button for when it matters most.",
+    shareBtn: "Share location",
+    refreshBtn: "Refresh",
+    locatingLabel: "Locating you",
+    liveLabel: "Your live position",
+    fallbackLabel: "Location unavailable",
+    guideTitle: "Offline guide",
+    guideMeta: "First aid and phrases",
+    firstAidHeading: "First aid basics",
+    phrasesHeading: "Emergency phrases",
+    firstAidItems: [
+      {
+        title: "Bleeding",
+        body: "Apply firm, direct pressure with cloth; keep the wound raised above the heart if possible; don't remove embedded objects.",
+      },
+      {
+        title: "Altitude / steppe exposure",
+        body: "Mongolia's plateau sits 1,300m+; rest, hydrate, and descend if you feel dizzy, nauseated, or breathless.",
+      },
+      {
+        title: "Cold exposure",
+        body: "Get out of wind, replace wet layers, warm the body's core before extremities.",
+      },
+      {
+        title: "Unresponsive & breathing",
+        body: "Place on their side, tilt the head back slightly to keep the airway open, stay with them.",
+      },
+    ],
+    phrases: [
+      { mn: "Туслаарай!", en: "Tuslaarai! — Help!" },
+      { mn: "Цагдаа дуудаарай!", en: "Tsagdaa duudaarai! — Call the police!" },
+      { mn: "Надад эмч хэрэгтэй", en: "Nadad emch heregtei — I need a doctor" },
+      { mn: "Би өвчтэй байна", en: "Bi uvchtei baina — I'm sick / in pain" },
+      { mn: "Би гэмтсэн", en: "Bi gemtsen — I've been injured" },
+    ],
+    hospitalLabel: "Nearby hospital",
+    hospitalSearching: "Searching nearby…",
+    hospitalNone: "None mapped nearby — call 103 for ambulance dispatch",
+    policeTitle: "Police station",
+    policeSearching: "Searching for the nearest station…",
+    policeNone: "None mapped nearby — call 102 directly",
+    policeLine: "National line — 102",
+    embassyTitle: "Your embassy",
+    embassyMeta:
+      "Select your nationality — most missions are based in Ulaanbaatar.",
+    embassyDirections: "Directions",
+    embassyFindContact: "Find contact",
+    embassyVerified: "Verified contact",
+    sos: "Hold for SOS help",
+    sosHoldHint: "Hold for 1.5s to activate",
+    sosHolding: "Keep holding…",
+    sosModalTitle: "SOS activated",
+    sosModalSub:
+      "Your live coordinates are ready. Choose what to do next — nothing is sent automatically.",
+    sosCallGeneral: "Call 105 — general emergency",
+    sosCallGeneralSub: "Fire, police & ambulance dispatch",
+    sosCallAmbulance: "Call 103 — ambulance",
+    sosCallAmbulanceSub: "Direct medical emergency line",
+    sosShare: "Share my live location",
+    sosCancel: "Cancel",
+    toastCopied: "Location link copied",
+    toastLocOff: "Location off — using Ulaanbaatar as reference",
+  };
+
+  const text: any = isEn ? safetyEn : safetyMn;
 
   const [coords, setCoords] = useState<Coords | null>(null);
   const [searchStatus, setSearchStatus] = useState<
@@ -140,10 +235,8 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
   const [isTracking, setIsTracking] = useState(false);
   const [trail, setTrail] = useState<TrailPoint[]>([]);
 
-  // ---- НАР ЖАРГАХ ХУГАЦААГ СЕКУНД ТУТАМД ХУРДАН ШИНЭЧЛЭХ СТЭЙТ ----
   const [timeLeftStr, setTimeLeftStr] = useState<string>("");
 
-  // Chimege API-аар уншиж байх үед ачаалж буйг харуулах стэйт
   const [audioLoadingKey, setAudioLoadingKey] = useState<number | null>(null);
 
   const holdStart = useRef<number | null>(null);
@@ -164,16 +257,14 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
     if (navigator.vibrate) navigator.vibrate(pattern);
   };
 
-  // ---- НАРНЫ ЦАГИЙН СЕКУНД ТУТМЫН ТООЦООЛОЛ ----
   useEffect(() => {
     const calculateSunsetCountdown = () => {
       const now = new Date();
       const sunset = new Date();
-      sunset.setHours(21, 40, 0, 0); // Нар жаргах тогтмол цаг 21:40
+      sunset.setHours(21, 40, 0, 0);
 
       let diffMs = sunset.getTime() - now.getTime();
       if (diffMs < 0) {
-        // Хэрэв 21:40-өөс хэтэрчихсэн бол маргаашийн нар жаргахыг заана
         sunset.setDate(sunset.getDate() + 1);
         diffMs = sunset.getTime() - now.getTime();
       }
@@ -575,17 +666,16 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
                 {text.description}
               </p>
             </div>
-            <button
+            {/* <button
               onClick={() => setAiModal(true)}
               className="self-start md:self-center flex items-center gap-2 rounded-2xl bg-linear-to-r from-purple-600 to-indigo-600 px-5 py-3 text-xs font-black uppercase tracking-wider hover:from-purple-700 hover:to-indigo-700 shadow-xl transition-all active:scale-95"
             >
               <MaterialIcon name="psychology" />{" "}
               {isEn ? "AI Diagnosis" : "AI Оношлогоо"}
-            </button>
+            </button> */}
           </div>
 
           <div className="mt-6 grid gap-6 md:grid-cols-12">
-            {/* ---- РАДАР & БАЙРШИЛ (СЕКУНД ТУТАМД ХУРДАН ШИНЭЧЛЭГДЭХ ХЭСЭГ) ---- */}
             <div className="relative overflow-hidden rounded-3xl p-6 text-center md:col-span-5 bg-white/5 border border-white/10 shadow-2xl flex flex-col items-center justify-center">
               <button
                 onClick={() => {
@@ -621,7 +711,7 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
                     : `Нарийвчлал: ${Math.round(coords?.accuracy || 35)}м`}
                 </span>
                 <span className="w-px h-2.5 bg-white/20" />
-                {/* ЭНД НАР ЖАРГАХ ХУГАЦАА СЕКУНД ТУТАМД ХУРДАН ШИНЭЧЛЭГДЭЖ БАЙНА */}
+
                 <span className="flex items-center gap-1">
                   <MaterialIcon
                     name="wb_twilight"
@@ -640,7 +730,6 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
               </button>
             </div>
 
-            {/* ---- МАР & ОЙРОЛЦООХ ГАЗРУУД ---- */}
             <div className="overflow-hidden rounded-3xl md:col-span-7 flex flex-col justify-between bg-white/5 border border-white/10 shadow-2xl">
               <div className="relative h-56 w-full">
                 <iframe
@@ -723,7 +812,6 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
               </div>
             </div>
 
-            {/* ---- BREADCRUMB TRAIL ---- */}
             <div className="rounded-3xl p-5 md:col-span-4 bg-linear-to-br from-neutral-900 to-neutral-950 border border-white/10 shadow-2xl flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3">
