@@ -22,13 +22,15 @@ export function AppShell({ active, setActive, language, setLanguage }: AppShellP
   const sideItems = SIDE_NAV_IDS.map((id) => items.find((item) => item.id === id)).filter((item): item is NavItem => Boolean(item));
   const text = copy[language];
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
   const sideActive = sideItems.some((item) => item.id === active);
+  const currentLanguage = languageOptions.find((option) => option.value === language) ?? languageOptions[0];
 
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/30 bg-white/55 backdrop-blur-2xl dark:border-white/10 dark:bg-[#0b0f11]/65">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6 md:px-10">
-          <div className="flex min-w-0 items-center gap-2">
+          <div className="flex min-w-0 flex-1 items-center gap-2 lg:flex-none">
             <button
               type="button"
               onClick={() => setSidebarOpen(true)}
@@ -42,17 +44,10 @@ export function AppShell({ active, setActive, language, setLanguage }: AppShellP
             </button>
 
             {/* Brand */}
-            <button type="button" onClick={() => setActive("discover")} className="flex min-w-0 items-center gap-2.5 text-left">
-              <span className="grid size-8 place-items-center rounded-xl bg-linear-to-br from-[#6bcbff] via-[#00658b] to-[#e0a32e] text-white shadow-md shadow-[#00658b]/30 sm:size-9">
-                <MaterialIcon name="explore" className="size-4.5" />
-              </span>
-              <span className="min-w-0 leading-none">
-                <span className="block text-sm font-black tracking-tight sm:text-base">
-                  AI <span className="text-gradient">Nomad</span>
-                </span>
-                <span className="mt-0.5 hidden text-[9px] font-bold uppercase tracking-[0.08em] text-black/45 dark:text-white/45 sm:block">
-                  {text.appTagline}
-                </span>
+            <button type="button" onClick={() => setActive("discover")} className="group flex min-w-0 flex-col items-start text-left" aria-label="AI Nomad home">
+              <BrandLogo className="text-[20px] sm:text-[23px]" />
+              <span className="mt-0.5 hidden max-w-[min(52vw,17rem)] whitespace-nowrap text-[9px] font-bold uppercase tracking-[0.08em] text-black/45 dark:text-white/45 sm:block lg:max-w-[13.5rem]">
+                {text.appTagline}
               </span>
             </button>
           </div>
@@ -78,22 +73,46 @@ export function AppShell({ active, setActive, language, setLanguage }: AppShellP
 
           {/* Controls */}
           <div className="flex items-center gap-1.5">
-            <div className="flex rounded-full border border-black/10 bg-white/50 p-0.5 backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
-              {languageOptions.map((option) => (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => setLanguage(option.value)}
-                  aria-pressed={language === option.value}
-                  className={`rounded-full px-2.5 py-1.5 text-[11px] font-black uppercase transition ${
-                    language === option.value
-                      ? "bg-[#00658b] text-white shadow-sm dark:bg-[#6bcbff] dark:text-[#001e2d]"
-                      : "text-black/50 hover:bg-black/5 dark:text-white/50 dark:hover:bg-white/10"
-                  }`}
-                >
-                  {option.value === "mn" ? "MN" : "EN"}
-                </button>
-              ))}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setLanguageOpen((open) => !open)}
+                aria-expanded={languageOpen}
+                aria-haspopup="menu"
+                className="flex h-9 items-center gap-1.5 rounded-full border border-black/10 bg-white/50 px-3 text-[11px] font-black uppercase text-black/65 backdrop-blur-xl transition hover:bg-black/5 dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:hover:bg-white/10 sm:h-10"
+              >
+                <span>{currentLanguage.value.toUpperCase()}</span>
+                <MaterialIcon name="chevron_right" className={`size-4 rotate-90 transition ${languageOpen ? "-rotate-90" : ""}`} />
+              </button>
+
+              <div
+                className={`absolute right-0 top-full mt-2 w-40 overflow-hidden rounded-2xl border border-black/10 bg-white/90 p-1 shadow-2xl shadow-black/15 backdrop-blur-2xl transition dark:border-white/10 dark:bg-[#0b0f11]/90 ${
+                  languageOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-1 opacity-0"
+                }`}
+                role="menu"
+              >
+                {languageOptions.map((option) => (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => {
+                      setLanguage(option.value);
+                      setLanguageOpen(false);
+                    }}
+                    aria-pressed={language === option.value}
+                    role="menuitemradio"
+                    aria-checked={language === option.value}
+                    className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-xs font-black transition ${
+                      language === option.value
+                        ? "bg-[#00658b] text-white shadow-sm dark:bg-[#6bcbff] dark:text-[#001e2d]"
+                        : "text-black/65 hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/10"
+                    }`}
+                  >
+                    <span className="truncate">{option.label}</span>
+                    <span className="text-[10px] uppercase opacity-70">{option.value}</span>
+                  </button>
+                ))}
+              </div>
             </div>
             <ThemeToggle />
           </div>
@@ -149,12 +168,10 @@ function SideDrawer({
         aria-hidden={!open}
       >
         <div className="flex items-center justify-between gap-3">
-          <button type="button" onClick={() => onSelect("discover")} className="flex items-center gap-2.5 text-left">
-            <span className="grid size-9 place-items-center rounded-xl bg-linear-to-br from-[#6bcbff] via-[#00658b] to-[#e0a32e] text-white shadow-md shadow-[#00658b]/30">
-              <MaterialIcon name="explore" className="size-4.5" />
-            </span>
-            <span className="text-sm font-black tracking-tight text-black dark:text-white">
-              AI <span className="text-gradient">Nomad</span>
+          <button type="button" onClick={() => onSelect("discover")} className="group flex min-w-0 flex-col items-start text-left" aria-label="AI Nomad home">
+            <BrandLogo className="text-[26px]" />
+            <span className="mt-1 max-w-40 truncate text-[9px] font-bold uppercase tracking-[0.08em] text-black/45 dark:text-white/45">
+              {copy[language].appTagline}
             </span>
           </button>
           <button
@@ -191,6 +208,20 @@ function SideDrawer({
         </nav>
       </aside>
     </>
+  );
+}
+
+function BrandLogo({ className }: { className: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`relative inline-block shrink-0 font-black leading-none tracking-normal text-black antialiased dark:text-white ${className}`}
+    >
+      <span className="absolute inset-0 text-[#00658b]/30 opacity-0 blur-[7px] transition-opacity duration-300 group-hover:opacity-100 dark:text-white/40">AI Nomad</span>
+      <span className="relative transition-[filter] duration-300 group-hover:drop-shadow-[0_1px_8px_rgba(0,101,139,0.22)] dark:group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
+        AI Nomad
+      </span>
+    </span>
   );
 }
 

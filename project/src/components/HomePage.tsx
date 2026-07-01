@@ -15,7 +15,7 @@ import type { Language, ScreenId } from "./nomad/types";
 
 export default function HomePage() {
   const [activeScreen, setActiveScreen] = useState<ScreenId>("discover");
-  const [language, setLanguage] = useState<Language>("mn");
+  const [language, setLanguage] = useState<Language>("en");
 
   return (
     <>

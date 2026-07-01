@@ -25,7 +25,7 @@ export function FilterChips({ language, selected, counts, onToggle }: Props) {
           active={selected.has(c)}
           onClick={() => onToggle(c)}
           icon={categoryMeta[c].icon}
-          label={`${language === "mn" ? categoryMeta[c].mn : categoryMeta[c].en}${counts[c] ? ` ${counts[c]}` : ""}`}
+          label={`${categoryMeta[c][language]}${counts[c] ? ` ${counts[c]}` : ""}`}
         />
       ))}
     </div>
