@@ -9,9 +9,6 @@ const PERIMETER = ["bayan-olgii", "uvs", "khuvsgul", "selenge", "dornod", "sukhb
 
 type Props = { counts: Record<string, number>; selected: string | null; language: Language; onSelect: (id: string) => void };
 
-/** Interactive Mongolia map: each aimag is a dot (sized by gem count) that
- *  lights up on hover and selects on click. The dot positions are the real
- *  province centroids, so the cloud reads as the country's shape. */
 export function AimagMap({ counts, selected, language, onSelect }: Props) {
   const pt = (id: string) => {
     const a = aimags.find((x) => x.id === id)!;

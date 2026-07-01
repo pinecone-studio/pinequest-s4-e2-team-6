@@ -10,7 +10,6 @@ import { GemsScreen } from "./nomad/screens/GemsScreen";
 import { OfflineScreen } from "./nomad/screens/OfflineScreen";
 import { PlannerScreen } from "./nomad/screens/PlannerScreen";
 import { SafetyScreen } from "./nomad/screens/SafetyScreen";
-import { AmbientToggle } from "./nomad/shared/AmbientToggle";
 import { AppShell } from "./nomad/shared/AppShell";
 import type { Language, ScreenId } from "./nomad/types";
 
@@ -32,8 +31,6 @@ export default function HomePage() {
 
       {/* Floating culture advisor — available on every screen, docked bottom-right */}
       <CultureWidget language={language} />
-      {/* Generative steppe ambience, docked bottom-left */}
-      <AmbientToggle language={language} />
     </>
   );
 }
