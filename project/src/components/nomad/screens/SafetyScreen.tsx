@@ -61,8 +61,51 @@ function haversine(lat1: number, lon1: number, lat2: number, lon2: number) {
 }
 
 export function SafetyScreen({ language }: SafetyScreenProps) {
-  const text = copy[language].safety;
   const isEn = language === "en";
+
+  const en = {
+    toastLocOff: "Location is turned off or fallback location used.",
+    liveLabel: "Live",
+    locatingLabel: "Locating...",
+    shareBtn: "Share",
+    hospitalSearching: "Searching for nearby hospitals...",
+    firstAidHeading: "First Aid Basics",
+    phrasesHeading: "Emergency Phrases",
+    embassyFindContact: "Find Embassy Contact",
+    sosHoldHint: "Press and hold SOS",
+    sosHolding: "Holding...",
+    sosModalTitle: "Emergency SOS",
+    sosModalSub: "Are you sure?",
+    sosCallGeneral: "Call 103",
+    sosCallGeneralSub: "Emergency ambulance",
+    sosShare: "Share location",
+    sosCancel: "Cancel",
+    firstAidItems: [],
+    phrases: [],
+  };
+
+  const mn = {
+    toastLocOff: "Галт тэрэг эсвэл байршил унтраалтай байна.",
+    liveLabel: "Шууд",
+    locatingLabel: "Байршил тогтоож байна...",
+    shareBtn: "Хуваалцах",
+    hospitalSearching: "Ойрхон эмнэлэг хайж байна...",
+    firstAidHeading: "Түр тусламж",
+    phrasesHeading: "Хэрэгцээт хэллэгүүд",
+    embassyFindContact: "Элчин сайдын яамтай холбогдох",
+    sosHoldHint: "SOS товчлуур дээр удаан дарна уу",
+    sosHolding: "Дуудлага хийж байна...",
+    sosModalTitle: "Яаралтай тусламж дуудах",
+    sosModalSub: "Та итгэлтэй байна уу?",
+    sosCallGeneral: "Шууд залгах",
+    sosCallGeneralSub: "Улсын нэгдсэн дугаар руу холбогдоно",
+    sosShare: "Байршил илгээх",
+    sosCancel: "Цуцлах",
+    firstAidItems: [],
+    phrases: [],
+  };
+
+  const text: any = isEn ? en : mn;
 
   const [coords, setCoords] = useState<Coords | null>(null);
   const [searchStatus, setSearchStatus] = useState<
@@ -147,11 +190,10 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
     };
 
     calculateSunsetCountdown();
-    const interval = setInterval(calculateSunsetCountdown, 1000); // 1 секунд тутамд маш хурдан шинэчилнэ
+    const interval = setInterval(calculateSunsetCountdown, 1000);
     return () => clearInterval(interval);
   }, [isEn]);
 
-  // ---- CHIMEGE API-ААР МАНАЙ ОНЦГОЙ ХЭЛЛЭГҮҮДИЙГ ТӨГС УНШИХ ФУНКЦ ----
   const speakPhraseWithChimege = async (phrase: string, index: number) => {
     setAudioLoadingKey(index);
     try {
@@ -169,7 +211,6 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
         throw new Error("Fallback to client TTS");
       }
     } catch {
-      // Хэрэв сүлжээгүй эсвэл Chimege API-д алдаа гарвал утасны өөрийн TTS руу шилжинэ (Офлайн хамгаалалт)
       if (!window.speechSynthesis) return showToast("TTS not supported");
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(phrase);
@@ -755,7 +796,6 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
               </div>
             </div>
 
-            {/* ---- ОФЛАЙН ЗААВАРЧИЛГАА (CHIMEGE API ИНТЕГРАЦ ОРСОН ХЭСЭГ) ---- */}
             <div className="rounded-3xl p-5 md:col-span-4 bg-white/5 border border-white/10 shadow-2xl">
               <div className="flex items-center gap-3">
                 <MaterialIcon
@@ -800,7 +840,7 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
                     >
                       <div className="pt-2 pb-1 max-h-48 overflow-y-auto space-y-2 scrollbar-none">
                         {key === "aid"
-                          ? text.firstAidItems.map((item, idx) => (
+                          ? text.firstAidItems.map((item: any, idx: number) => (
                               <div
                                 key={idx}
                                 className="bg-white/5 p-2.5 rounded-xl border border-white/5"
@@ -813,7 +853,7 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
                                 </div>
                               </div>
                             ))
-                          : text.phrases.map((p, idx) => (
+                          : text.phrases.map((p: any, idx: number) => (
                               <div
                                 key={idx}
                                 className="flex justify-between items-center bg-white/5 p-2.5 rounded-xl border border-white/5 text-[11px] font-medium group"
@@ -826,7 +866,7 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
                                     {p.en.split("—")[1] ?? p.en}
                                   </span>
                                 </div>
-                                {/* CHIMEGE API-АР ИЛҮҮ ЦЭВЭРХЭН УНШИХ ТОВЧЛУУР */}
+
                                 <button
                                   onClick={() =>
                                     speakPhraseWithChimege(p.mn, idx)
@@ -852,7 +892,6 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
               </div>
             </div>
 
-            {/* ---- ТАНЫ ЭЛЧИН САЙДЫН ЯАМ ---- */}
             <div className="rounded-3xl p-5 md:col-span-4 bg-white/5 border border-white/10 shadow-2xl flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3">
@@ -908,7 +947,6 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
               </div>
             </div>
 
-            {/* ---- ШУУРХАЙ ДУУДЛАГА ---- */}
             <div className="rounded-3xl p-5 md:col-span-4 bg-white/5 border border-white/10 shadow-2xl flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3">
@@ -945,7 +983,6 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
             </div>
           </div>
 
-          {/* ---- SOS FLOATING BUTTON ---- */}
           <div className="fixed bottom-6 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center w-full px-4 max-w-sm">
             {holding && (
               <div className="mb-2 rounded-full bg-black/95 px-3 py-1 text-[10px] font-black text-white backdrop-blur-md animate-bounce tracking-wider">
@@ -973,7 +1010,6 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
             </button>
           </div>
 
-          {/* ---- SOS MODAL ---- */}
           {sosOpen && (
             <div
               className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 backdrop-blur-sm md:items-center p-4"
@@ -1051,7 +1087,6 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
             </div>
           )}
 
-          {/* ---- AI DIAGNOSIS MODAL ---- */}
           {aiModal && (
             <div
               className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 backdrop-blur-sm md:items-center p-4"
