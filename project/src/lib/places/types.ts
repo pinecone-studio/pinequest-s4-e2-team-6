@@ -36,4 +36,4 @@ export const CATEGORIES: PlaceCategory[] = [
   "HIDDEN_GEM",
 ];
 
-export const RADIUS_M = 10_000; // 10 km search radius
+export const RADIUS_M = 300_000; // 300 km AR search radius

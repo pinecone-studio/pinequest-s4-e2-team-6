@@ -25,18 +25,18 @@ export function getBearing(lat1: number, lon1: number, lat2: number, lon2: numbe
 
 /** Distance-based depth cues — nearer = bigger, brighter, sharper. */
 export function scaleFor(d: number): number {
-  return Math.max(0.5, Math.min(1, 1 - (d - 100) / 2000));
+  return Math.max(0.46, Math.min(1, 1 - Math.log10(Math.max(d, 100) / 100) / 5.2));
 }
 export function opacityFor(d: number): number {
-  return Math.max(0.4, 1 - d / 3000);
+  return Math.max(0.48, 1 - Math.log10(Math.max(d, 100) / 100) / 6);
 }
 export function blurFor(d: number): number {
-  return d > 1500 ? Math.min(2.4, (d - 1500) / 1800) : 0;
+  return d > 30_000 ? Math.min(1.8, (d - 30_000) / 180_000) : 0;
 }
 
 /** Elevation angle (deg): near points sit lower, far points rise to the horizon. */
 export function elevationFor(d: number): number {
-  return -6 + Math.min(1, d / 10000) * 8;
+  return -6 + Math.min(1, Math.log10(Math.max(d, 100) / 100) / 3.5) * 8;
 }
 
 /** Rough walking time in minutes at ~5 km/h. */
