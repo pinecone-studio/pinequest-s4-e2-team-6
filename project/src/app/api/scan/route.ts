@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { identify } from "@/lib/ai/vision";
 import { clientIp, rateLimit } from "@/lib/ai/rateLimit";
-import type { Coords, Language } from "@/lib/camera/types";
+import { isLanguage, type Language } from "@/components/nomad/types";
+import type { Coords } from "@/lib/camera/types";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -40,7 +41,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "image-too-large" }, { status: 413 });
   }
 
-  const language: Language = body.language === "en" ? "en" : "mn";
+  const language: Language = isLanguage(body.language) ? body.language : "mn";
 
   try {
     const recognition = await identify(image, language, body.coords ?? null);

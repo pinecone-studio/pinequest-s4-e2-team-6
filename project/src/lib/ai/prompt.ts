@@ -97,10 +97,13 @@ const RULES = [
 ];
 
 export function buildPrompt(language: Language, hasCoords: boolean): string {
-  const lang =
-    language === "mn"
-      ? "Respond with all text fields written in Mongolian (Cyrillic). Use 'Тодорхойгүй' for unknown facts."
-      : "Respond with all text fields written in English.";
+  const lang = {
+    mn: "Respond with all text fields written in Mongolian (Cyrillic). Use 'Тодорхойгүй' for unknown facts.",
+    en: "Respond with all text fields written in English.",
+    zh: "Respond with all text fields written in Simplified Chinese.",
+    ru: "Respond with all text fields written in Russian.",
+    es: "Respond with all text fields written in Spanish.",
+  }[language];
   const geo = hasCoords
     ? "Approximate scanner-device GPS coordinates are provided, but they may be where the user is standing rather than where the landmark in the image is located. Treat them as weak context."
     : "";

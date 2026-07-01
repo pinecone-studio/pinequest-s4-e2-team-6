@@ -20,7 +20,10 @@ export function featuredGem(language: Language, now: Date) {
 const SEASONS = {
   mn: ["Өвөл", "Хавар", "Зун", "Намар"],
   en: ["Winter", "Spring", "Summer", "Autumn"],
-};
+  zh: ["冬季", "春季", "夏季", "秋季"],
+  ru: ["Зима", "Весна", "Лето", "Осень"],
+  es: ["Invierno", "Primavera", "Verano", "Otono"],
+} satisfies Record<Language, string[]>;
 
 // Travel desirability per month (1–10) — peak summer + golden autumn rank highest.
 const SCORE = [4, 4, 5, 6, 8, 9, 10, 10, 9, 7, 5, 4];
@@ -30,13 +33,13 @@ export function seasonNow(language: Language, now: Date) {
   const m = now.getMonth();
   const season = SEASONS[language][Math.floor(((m + 1) % 12) / 3)];
   const good = SCORE[m] >= 8;
-  const note =
-    language === "mn"
-      ? good
-        ? "Аялахад хамгийн тохиромжтой"
-        : "Аялал боломжтой"
-      : good
-        ? "Prime season to visit"
-        : "Open for travel";
+  const notes = {
+    mn: good ? "Аялахад хамгийн тохиромжтой" : "Аялал боломжтой",
+    en: good ? "Prime season to visit" : "Open for travel",
+    zh: good ? "最佳旅行季" : "适合旅行",
+    ru: good ? "Лучший сезон для поездки" : "Можно путешествовать",
+    es: good ? "Temporada ideal para visitar" : "Abierto para viajar",
+  };
+  const note = notes[language];
   return { season, note, good };
 }

@@ -3,14 +3,14 @@ import type { NearbyPlace } from "@/lib/places/types";
 import type { Language } from "../types";
 
 const TICKS = [
-  { deg: 0, label: { mn: "Х", en: "N" } },
-  { deg: 45, label: { mn: "ЗХ", en: "NE" } },
-  { deg: 90, label: { mn: "З", en: "E" } },
-  { deg: 135, label: { mn: "ЗУ", en: "SE" } },
-  { deg: 180, label: { mn: "У", en: "S" } },
-  { deg: 225, label: { mn: "БУ", en: "SW" } },
-  { deg: 270, label: { mn: "Б", en: "W" } },
-  { deg: 315, label: { mn: "БХ", en: "NW" } },
+  { deg: 0, label: { mn: "Х", en: "N", zh: "北", ru: "С", es: "N" } },
+  { deg: 45, label: { mn: "ЗХ", en: "NE", zh: "东北", ru: "СВ", es: "NE" } },
+  { deg: 90, label: { mn: "З", en: "E", zh: "东", ru: "В", es: "E" } },
+  { deg: 135, label: { mn: "ЗУ", en: "SE", zh: "东南", ru: "ЮВ", es: "SE" } },
+  { deg: 180, label: { mn: "У", en: "S", zh: "南", ru: "Ю", es: "S" } },
+  { deg: 225, label: { mn: "БУ", en: "SW", zh: "西南", ru: "ЮЗ", es: "SO" } },
+  { deg: 270, label: { mn: "Б", en: "W", zh: "西", ru: "З", es: "O" } },
+  { deg: 315, label: { mn: "БХ", en: "NW", zh: "西北", ru: "СЗ", es: "NO" } },
 ];
 
 type Props = { heading: number; places: NearbyPlace[]; language: Language };
