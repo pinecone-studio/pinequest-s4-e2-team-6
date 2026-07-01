@@ -1,7 +1,7 @@
 import { clientIp, rateLimit } from "@/lib/ai/rateLimit";
 import { systemPrompt } from "@/lib/culture/prompt";
 import type { WireMessage } from "@/lib/culture/types";
-import type { Language } from "@/components/nomad/types";
+import { isLanguage, type Language } from "@/components/nomad/types";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
 
   const history = sanitize(body.messages);
   if (history.length === 0) return new Response("no-messages", { status: 400 });
-  const language: Language = body.language === "en" ? "en" : "mn";
+  const language: Language = isLanguage(body.language) ? body.language : "mn";
 
   const upstream = await fetch(ENDPOINT, {
     method: "POST",

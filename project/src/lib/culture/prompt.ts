@@ -9,9 +9,12 @@ export function systemPrompt(language: Language): string {
     "ONLY discuss Mongolia — its culture, history, places, food, language, nature and travel. If asked about anything else, politely say you only cover Mongolia and invite a Mongolia-related question.",
     "Always reply in text. Do not describe or reference images; relevant photos are added automatically when the user asks about a specific place. Never invent facts; if unsure, say so.",
   ];
-  const lang =
-    language === "mn"
-      ? "Always answer in natural Mongolian (Cyrillic)."
-      : "Always answer in clear, friendly English.";
+  const lang = {
+    mn: "Always answer in natural Mongolian (Cyrillic).",
+    en: "Always answer in clear, friendly English.",
+    zh: "Always answer in clear, friendly Simplified Chinese.",
+    ru: "Always answer in clear, friendly Russian.",
+    es: "Always answer in clear, friendly Spanish.",
+  }[language];
   return [...base, lang].join(" ");
 }

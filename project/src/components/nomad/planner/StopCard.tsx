@@ -11,7 +11,7 @@ const tugrik = (n: number) => (n === 0 ? "" : new Intl.NumberFormat("en-US").for
 export function StopCard({ stop, language }: { stop: Stop; language: Language }) {
   const meta = catMeta[stop.category];
   const name = language === "mn" ? stop.nameMn : stop.nameEn;
-  const free = language === "mn" ? "Үнэгүй" : "Free";
+  const free = { mn: "Үнэгүй", en: "Free", zh: "免费", ru: "Бесплатно", es: "Gratis" }[language];
 
   return (
     <div className="glass-panel animate-fade-up flex items-center gap-3 rounded-2xl p-3.5">
@@ -27,7 +27,7 @@ export function StopCard({ stop, language }: { stop: Stop; language: Language })
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-black tracking-tight">{name}</p>
         <p className="text-[11px] font-bold uppercase tracking-tight" style={{ color: meta.color }}>
-          {language === "mn" ? meta.mn : meta.en}
+          {meta[language]}
         </p>
       </div>
 

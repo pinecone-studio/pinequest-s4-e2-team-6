@@ -2,6 +2,7 @@ import { cafeShop } from "./seed/cafeShop";
 import { culture } from "./seed/culture";
 import { food } from "./seed/food";
 import { stayPark } from "./seed/stayPark";
+import type { Language } from "@/components/nomad/types";
 import type { PlanParams, PlannerPlace } from "./types";
 
 /** ~120 curated Ulaanbaatar places — the AI may only build routes from these. */
@@ -27,7 +28,7 @@ export function candidatesFor(params: PlanParams, limit = 34): PlannerPlace[] {
 }
 
 /** Compact lines fed to the AI so it can pick by id. */
-export function candidateLines(places: PlannerPlace[], lang: "mn" | "en"): string {
+export function candidateLines(places: PlannerPlace[], lang: Language): string {
   return places
     .map((p) => `${p.id} | ${lang === "mn" ? p.nameMn : p.nameEn} | ${p.category} | ${p.price}₮ | ${p.durationMin}min | ${p.openHours}`)
     .join("\n");
