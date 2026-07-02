@@ -26,6 +26,12 @@ type Strings = {
   budget: string;
   duration: string;
   walk: string;
+  save: string;
+  savedPlans: string;
+  planDate: string;
+  noHistory: string;
+  openPlan: string;
+  deletePlan: string;
   refineTitle: string;
   refine: { cheaper: string; addHour: string; shorter: string; more: string };
 };
@@ -45,6 +51,12 @@ export const plannerCopy: Record<Language, Strings> = {
     budget: "Төсөв",
     duration: "Хугацаа",
     walk: "мин алхах",
+    save: "Хадгалах",
+    savedPlans: "Түүх",
+    planDate: "Өдөр",
+    noHistory: "Энэ өдөр хадгалсан төлөвлөгөө алга.",
+    openPlan: "Нээх",
+    deletePlan: "Устгах",
     refineTitle: "Тохируулах",
     refine: { cheaper: "Хямд болго", addHour: "1 цаг нэм", shorter: "Богино болго", more: "Газар нэм" },
   },
@@ -62,6 +74,12 @@ export const plannerCopy: Record<Language, Strings> = {
     budget: "Budget",
     duration: "Time",
     walk: "min walk",
+    save: "Save",
+    savedPlans: "History",
+    planDate: "Date",
+    noHistory: "No saved plans for this date.",
+    openPlan: "Open",
+    deletePlan: "Delete",
     refineTitle: "Refine",
     refine: { cheaper: "Cheaper", addHour: "+1 hour", shorter: "Shorter", more: "Add a stop" },
   },
@@ -79,6 +97,12 @@ export const plannerCopy: Record<Language, Strings> = {
     budget: "预算",
     duration: "时间",
     walk: "分钟步行",
+    save: "保存",
+    savedPlans: "历史",
+    planDate: "日期",
+    noHistory: "这一天没有保存的行程。",
+    openPlan: "打开",
+    deletePlan: "删除",
     refineTitle: "调整",
     refine: { cheaper: "更便宜", addHour: "+1 小时", shorter: "更短", more: "加一站" },
   },
@@ -96,6 +120,12 @@ export const plannerCopy: Record<Language, Strings> = {
     budget: "Бюджет",
     duration: "Время",
     walk: "мин пешком",
+    save: "Сохранить",
+    savedPlans: "История",
+    planDate: "Дата",
+    noHistory: "На эту дату сохраненных планов нет.",
+    openPlan: "Открыть",
+    deletePlan: "Удалить",
     refineTitle: "Уточнить",
     refine: { cheaper: "Дешевле", addHour: "+1 час", shorter: "Короче", more: "Добавить место" },
   },
@@ -113,6 +143,12 @@ export const plannerCopy: Record<Language, Strings> = {
     budget: "Presupuesto",
     duration: "Tiempo",
     walk: "min caminando",
+    save: "Guardar",
+    savedPlans: "Historial",
+    planDate: "Fecha",
+    noHistory: "No hay planes guardados para esta fecha.",
+    openPlan: "Abrir",
+    deletePlan: "Eliminar",
     refineTitle: "Ajustar",
     refine: { cheaper: "Mas barato", addHour: "+1 hora", shorter: "Mas corto", more: "Agregar parada" },
   },

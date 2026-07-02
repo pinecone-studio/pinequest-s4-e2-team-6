@@ -15,6 +15,7 @@ type Body = {
   previous?: PlanParams | null;
   params?: PlanParams;
   candidates?: string;
+  requiredIds?: string[];
 };
 
 /** POST /api/planner — extract plan params from text, or pick a grounded route. */
@@ -66,7 +67,7 @@ function build(body: Body) {
     return { system: extractPrompt(), user: `${body.text ?? ""}${prev}`, schema: extractSchema, name: "params" };
   }
   if (body.mode === "plan" && body.params && body.candidates) {
-    return { system: planPrompt(body.params, body.candidates), user: "Build the route.", schema: planSchema, name: "route" };
+    return { system: planPrompt(body.params, body.candidates, body.requiredIds ?? []), user: "Build the route.", schema: planSchema, name: "route" };
   }
   return { system: "", user: "", schema: extractSchema, name: "params" };
 }

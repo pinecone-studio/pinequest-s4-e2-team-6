@@ -12,8 +12,13 @@ function dayOfYear(d: Date): number {
 export function featuredGem(language: Language, now: Date) {
   const items = copy[language].gems.items;
   const [title, region] = items[dayOfYear(now) % items.length];
-  const gem = gems.find((g) => (language === "mn" ? g.nameMn : g.nameEn) === title);
-  const displayTitle = gem ? `${gem.lat.toFixed(2)}, ${gem.lng.toFixed(2)}` : title;
+  const normalizedTitle = title.toLowerCase();
+  const gem = gems.find((g) => {
+    const name = language === "mn" ? g.nameMn : g.nameEn;
+    const normalizedName = name.toLowerCase();
+    return normalizedName === normalizedTitle || normalizedTitle.includes(normalizedName);
+  });
+  const displayTitle = gem ? `${gem.lat.toFixed(5)}, ${gem.lng.toFixed(5)}` : title;
   return { title: displayTitle, region };
 }
 

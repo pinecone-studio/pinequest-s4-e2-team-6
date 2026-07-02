@@ -40,6 +40,15 @@ export type Itinerary = {
   totalMin: number;
 };
 
+export type SavedPlan = {
+  id: string;
+  title: string;
+  date: string;
+  createdAt: string;
+  params: PlanParams;
+  itinerary: Itinerary;
+};
+
 export const INTEREST_CATEGORIES: PlannerCategory[] = [
   "FOOD",
   "CAFE",

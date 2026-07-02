@@ -38,11 +38,13 @@ export function extractPrompt(): string {
   ].join(" ");
 }
 
-export function planPrompt(params: PlanParams, candidates: string): string {
+export function planPrompt(params: PlanParams, candidates: string, requiredIds: string[] = []): string {
+  const required = requiredIds.length ? `Required stops that must be included if present in CANDIDATES: ${requiredIds.join(", ")}.` : "";
   return [
     "You are a Ulaanbaatar day-trip planner.",
     "Build ONE ordered route using ONLY the candidate places below, by their exact id.",
     "Never invent places. Include 1-2 FOOD stops near meal times. Keep within budget and time.",
+    required,
     `Target: ~${params.budget}MNT total, about ${params.durationHours} hours, ${params.pace} pace.`,
     "Pick 3-7 stops in a logical visiting order; set startTime like '10:00'.",
     "Return only the chosen ids in 'stops'.",

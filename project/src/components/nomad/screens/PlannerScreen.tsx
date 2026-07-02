@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { images } from "../data/content";
 import { ScreenFrame } from "../shared/ScreenFrame";
 import { OrnamentDivider } from "../shared/Ornament";
+import { MaterialIcon } from "../icons/MaterialIcon";
 import { BudgetBar } from "../planner/BudgetBar";
+import { PlannerHistory } from "../planner/PlannerHistory";
 import { PlannerInput } from "../planner/PlannerInput";
 import { RefineBar } from "../planner/RefineBar";
 import { Timeline } from "../planner/Timeline";
@@ -12,6 +15,11 @@ import { usePlanner } from "@/lib/planner/usePlanner";
 import type { Language } from "../types";
 
 type PlannerScreenProps = { language: Language };
+const today = () => {
+  const date = new Date();
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60_000);
+  return local.toISOString().slice(0, 10);
+};
 
 /**
  * AI day planner: free-text request → AI extracts budget/time/interests →
@@ -19,8 +27,10 @@ type PlannerScreenProps = { language: Language };
  */
 export function PlannerScreen({ language }: PlannerScreenProps) {
   const t = plannerCopy[language];
-  const { itinerary, params, loading, error, generate, adjust } = usePlanner(language);
+  const [saveDate, setSaveDate] = useState(today);
+  const { itinerary, params, history, loading, error, generate, adjust, saveCurrent, deleteSaved, loadSaved } = usePlanner(language);
   const hasRoute = itinerary && params && itinerary.stops.length > 0;
+  const hasGemRoute = Boolean(itinerary?.stops.some((stop) => stop.id.startsWith("gem:")));
 
   return (
     <ScreenFrame bg={images.steppe}>
@@ -44,9 +54,30 @@ export function PlannerScreen({ language }: PlannerScreenProps) {
           <div className="animate-fade-up space-y-4">
             <BudgetBar itinerary={itinerary} params={params} language={language} />
             <Timeline itinerary={itinerary} language={language} />
-            <RefineBar language={language} params={params} loading={loading} onAdjust={adjust} />
+            <div className="glass-panel flex flex-wrap items-center justify-between gap-3 rounded-[24px] p-4">
+              <label className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/45 px-3 py-2 text-xs font-bold dark:border-white/10 dark:bg-white/5">
+                <span className="text-black/50 dark:text-white/50">{t.planDate}</span>
+                <input
+                  type="date"
+                  value={saveDate}
+                  onChange={(event) => setSaveDate(event.target.value)}
+                  className="bg-transparent font-black outline-none"
+                />
+              </label>
+              <button
+                type="button"
+                onClick={() => saveCurrent(saveDate)}
+                className="inline-flex items-center gap-2 rounded-full bg-[#00658b] px-4 py-2.5 text-sm font-black tracking-tight text-white transition hover:scale-[1.03] dark:bg-[#7dd0ff] dark:text-[#001e2d]"
+              >
+                <MaterialIcon name="bookmark_add" className="size-4" />
+                {t.save}
+              </button>
+            </div>
+            {!hasGemRoute && <RefineBar language={language} params={params} loading={loading} onAdjust={adjust} />}
           </div>
         )}
+
+        <PlannerHistory language={language} history={history} onLoad={loadSaved} onDelete={deleteSaved} />
       </section>
     </ScreenFrame>
   );
