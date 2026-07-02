@@ -8,6 +8,7 @@ import { gemImage } from "@/lib/gems/images";
 import { formatDistance } from "@/lib/places/geo";
 import { useRoute } from "@/lib/gems/useRoute";
 import { useArStory } from "@/lib/ar/useArStory";
+import { storePendingPlanGem } from "@/lib/planner/pendingGem";
 import type { Coords, Gem } from "@/lib/gems/types";
 import type { Language, ScreenId } from "../types";
 
@@ -31,10 +32,14 @@ export function GemDetail({ gem, coords, language, onClose, onNavigate }: Props)
     story.run(gem.id, mn
       ? `Аялагчид зориулж Монгол дахь "${name}" газрын тухай 3-4 өгүүлбэрээр сонирхолтой танилцуул.`
       : `Tell a traveler about "${name}" in Mongolia in 3-4 engaging sentences.`);
+  const addToPlan = () => {
+    storePendingPlanGem(gem);
+    onNavigate("planner");
+  };
 
   return (
-    <div className="fixed inset-0 z-[60] overflow-y-auto bg-[#08111c]/80 backdrop-blur-sm" onClick={onClose}>
-      <div className="glass-panel animate-fade-up mx-auto my-6 w-[min(94%,40rem)] overflow-hidden rounded-[28px]" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 z-[60] overflow-y-auto bg-[#08111c]/80 px-3 pb-6 pt-24 backdrop-blur-sm sm:pt-28" onClick={onClose}>
+      <div className="glass-panel animate-fade-up mx-auto w-[min(94%,40rem)] overflow-hidden rounded-[28px]" onClick={(e) => e.stopPropagation()}>
         <div className="relative h-52 overflow-hidden">
           {img ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -45,7 +50,7 @@ export function GemDetail({ gem, coords, language, onClose, onNavigate }: Props)
             </div>
           )}
           <div className="absolute inset-0 bg-linear-to-t from-[#08111c]/92 to-transparent" />
-          <button type="button" onClick={onClose} className="glass-dark absolute right-3 top-3 grid size-9 place-items-center rounded-full text-white">
+          <button type="button" onClick={onClose} className="glass-dark absolute right-3 top-3 z-10 grid size-10 place-items-center rounded-full text-white shadow-lg shadow-black/30">
             <MaterialIcon name="close" className="size-[18px]" />
           </button>
           <div className="absolute inset-x-0 bottom-0 p-5 text-white">
@@ -78,7 +83,7 @@ export function GemDetail({ gem, coords, language, onClose, onNavigate }: Props)
           </div>
 
           <div className="animate-fade-up delay-3 grid grid-cols-2 gap-2">
-            <Action icon="event_note" label={t.addPlan} onClick={() => onNavigate("planner")} />
+            <Action icon="event_note" label={t.addPlan} onClick={addToPlan} />
             <Action icon="view_in_ar" label={t.viewAr} onClick={() => onNavigate("ar")} />
             <Action icon="cloud_download" label={t.offline} onClick={() => onNavigate("offline")} />
             <Action icon="auto_awesome" label={t.guide} onClick={ask} highlight />

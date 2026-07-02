@@ -61,16 +61,16 @@ export function CameraViewport({
         </div>
       )}
 
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center">
-        <p className="mb-3 text-xs font-semibold text-white/80 drop-shadow">{t.hint}</p>
+      <div className="absolute bottom-8 left-1/2 flex w-[min(88%,18rem)] -translate-x-1/2 flex-col items-center text-center sm:bottom-6">
+        <p className="mb-2 text-xs font-semibold text-white/80 drop-shadow sm:mb-3">{t.hint}</p>
         <button
           type="button"
           onClick={onCapture}
           disabled={busy}
           aria-label={t.capture}
-          className="grid size-20 place-items-center rounded-full border-4 border-white/80 bg-[#6bcbff] text-[#00344b] shadow-[0_20px_40px_rgba(0,101,139,0.35)] transition hover:scale-105 disabled:opacity-60"
+          className="grid size-16 place-items-center rounded-full border-4 border-white/80 bg-[#6bcbff] text-[#00344b] shadow-[0_20px_40px_rgba(0,101,139,0.35)] transition hover:scale-105 disabled:opacity-60 sm:size-20"
         >
-          <MaterialIcon name="document_scanner" className="size-[34px]" />
+          <MaterialIcon name="document_scanner" className="size-7 sm:size-[34px]" />
         </button>
       </div>
     </div>
