@@ -41,7 +41,6 @@ export const InvitationDesigner: React.FC = () => {
 
   return (
     <div className="flex h-screen w-full bg-gray-50 overflow-hidden">
-      {/* Sidebar Editor */}
       <aside className="w-1/3 bg-white p-8 border-r border-gray-200 overflow-y-auto">
         <h2 className="text-2xl font-bold mb-6">Designer Console</h2>
         
