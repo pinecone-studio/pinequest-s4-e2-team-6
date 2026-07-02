@@ -1,108 +1,107 @@
-// 'use client';
+'use client';
 
-// import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
-// // Types
-// interface Theme {
-//   id: string;
-//   name: string;
-//   primaryColor: string;
-//   fontFamily: string;
-// }
+// Types
+interface Theme {
+  id: string;
+  name: string;
+  primaryColor: string;
+  fontFamily: string;
+}
 
-// interface InvitationState {
-//   title: string;
-//   body: string;
-//   receiver: string;
-//   theme: Theme;
-// }
+interface InvitationState {
+  title: string;
+  body: string;
+  receiver: string;
+  theme: Theme;
+}
 
-// const THEMES: Theme[] = [
-//   { id: 'classic', name: 'Classic Elegance', primaryColor: '#1a202c', fontFamily: 'serif' },
-//   { id: 'modern', name: 'Modern Minimalist', primaryColor: '#4f46e5', fontFamily: 'sans-serif' },
-//   { id: 'floral', name: 'Floral Bloom', primaryColor: '#db2777', fontFamily: 'cursive' },
-// ];
+const THEMES: Theme[] = [
+  { id: 'classic', name: 'Classic Elegance', primaryColor: '#1a202c', fontFamily: 'serif' },
+  { id: 'modern', name: 'Modern Minimalist', primaryColor: '#4f46e5', fontFamily: 'sans-serif' },
+  { id: 'floral', name: 'Floral Bloom', primaryColor: '#db2777', fontFamily: 'cursive' },
+];
 
-// export const InvitationDesigner: React.FC = () => {
-//   const [data, setData] = useState<InvitationState>({
-//     title: 'Your Event Title',
-//     body: 'Join us for a special celebration!',
-//     receiver: 'Dear Guest',
-//     theme: THEMES[0],
-//   });
+export const InvitationDesigner: React.FC = () => {
+  const [data, setData] = useState<InvitationState>({
+    title: 'Your Event Title',
+    body: 'Join us for a special celebration!',
+    receiver: 'Dear Guest',
+    theme: THEMES[0],
+  });
 
-//   const [isEditing, setIsEditing] = useState<boolean>(true);
-//   const containerRef = useRef<HTMLDivElement>(null);
+  const [isEditing, setIsEditing] = useState<boolean>(true);
+  const containerRef = useRef<HTMLDivElement>(null);
   
-//   // Animation scroll logic
-//   const handleUpdate = (key: keyof InvitationState, value: any) => {
-//     setData((prev) => ({ ...prev, [key]: value }));
-//   };
+  // Animation scroll logic
+  const handleUpdate = (key: keyof InvitationState, value: any) => {
+    setData((prev) => ({ ...prev, [key]: value }));
+  };
 
-//   return (
-//     <div className="flex h-screen w-full bg-gray-50 overflow-hidden">
-//       {/* Sidebar Editor */}
-//       <aside className="w-1/3 bg-white p-8 border-r border-gray-200 overflow-y-auto">
-//         <h2 className="text-2xl font-bold mb-6">Designer Console</h2>
+  return (
+    <div className="flex h-screen w-full bg-gray-50 overflow-hidden">
+      <aside className="w-1/3 bg-white p-8 border-r border-gray-200 overflow-y-auto">
+        <h2 className="text-2xl font-bold mb-6">Designer Console</h2>
         
-//         <div className="space-y-6">
-//           <div>
-//             <label className="block text-sm font-medium mb-2">Event Title</label>
-//             <input 
-//               className="w-full p-2 border rounded"
-//               value={data.title}
-//               onChange={(e) => handleUpdate('title', e.target.value)}
-//             />
-//           </div>
+        <div className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium mb-2">Event Title</label>
+            <input 
+              className="w-full p-2 border rounded"
+              value={data.title}
+              onChange={(e) => handleUpdate('title', e.target.value)}
+            />
+          </div>
 
-//           <div>
-//             <label className="block text-sm font-medium mb-2">Message Body</label>
-//             <textarea 
-//               className="w-full p-2 border rounded h-32"
-//               value={data.body}
-//               onChange={(e) => handleUpdate('body', e.target.value)}
-//             />
-//           </div>
+          <div>
+            <label className="block text-sm font-medium mb-2">Message Body</label>
+            <textarea 
+              className="w-full p-2 border rounded h-32"
+              value={data.body}
+              onChange={(e) => handleUpdate('body', e.target.value)}
+            />
+          </div>
 
-//           <div>
-//             <label className="block text-sm font-medium mb-2">Theme Selection</label>
-//             {THEMES.map((t) => (
-//               <button
-//                 key={t.id}
-//                 onClick={() => handleUpdate('theme', t)}
-//                 className={`block w-full p-2 mb-2 rounded border ${data.theme.id === t.id ? 'bg-indigo-100 border-indigo-500' : ''}`}
-//               >
-//                 {t.name}
-//               </button>
-//             ))}
-//           </div>
-//         </div>
-//       </aside>
+          <div>
+            <label className="block text-sm font-medium mb-2">Theme Selection</label>
+            {THEMES.map((t) => (
+              <button
+                key={t.id}
+                onClick={() => handleUpdate('theme', t)}
+                className={`block w-full p-2 mb-2 rounded border ${data.theme.id === t.id ? 'bg-indigo-100 border-indigo-500' : ''}`}
+              >
+                {t.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      </aside>
 
-//       {/* Preview Area */}
-//       <main className="flex-1 p-12 flex items-center justify-center">
-//         <div
-//           className="w-full max-w-2xl bg-white shadow-2xl rounded-xl p-16 relative overflow-hidden"
-//         >
-//           <div className="absolute top-0 left-0 w-full h-2" style={{ backgroundColor: data.theme.primaryColor }} />
+      {/* Preview Area */}
+      <main className="flex-1 p-12 flex items-center justify-center">
+        <div
+          className="w-full max-w-2xl bg-white shadow-2xl rounded-xl p-16 relative overflow-hidden"
+        >
+          <div className="absolute top-0 left-0 w-full h-2" style={{ backgroundColor: data.theme.primaryColor }} />
           
-//           <h1 className="text-5xl font-bold mb-8" style={{ fontFamily: data.theme.fontFamily, color: data.theme.primaryColor }}>
-//             {data.title}
-//           </h1>
+          <h1 className="text-5xl font-bold mb-8" style={{ fontFamily: data.theme.fontFamily, color: data.theme.primaryColor }}>
+            {data.title}
+          </h1>
           
-//           <p className="text-xl mb-4">{data.receiver},</p>
-//           <p className="text-lg text-gray-700 leading-relaxed italic">{data.body}</p>
+          <p className="text-xl mb-4">{data.receiver},</p>
+          <p className="text-lg text-gray-700 leading-relaxed italic">{data.body}</p>
 
-//           <div 
-//             className="mt-12 p-4 border-t border-gray-100"
-//           >
-//             <p className="text-sm uppercase tracking-widest text-gray-400">Powered by Belgely</p>
-//           </div>
-//         </div>
-//       </main>
-//     </div>
-//   );
-// };
+          <div 
+            className="mt-12 p-4 border-t border-gray-100"
+          >
+            <p className="text-sm uppercase tracking-widest text-gray-400">Powered by Belgely</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};
 
 // "use client";
 
