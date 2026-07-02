@@ -38,9 +38,9 @@ export function GemDetail({ gem, coords, language, onClose, onNavigate }: Props)
   };
 
   return (
-    <div className="fixed inset-0 z-[60] overflow-y-auto bg-[#08111c]/80 px-3 pb-6 pt-24 backdrop-blur-sm sm:pt-28" onClick={onClose}>
-      <div className="glass-panel animate-fade-up mx-auto w-[min(94%,40rem)] overflow-hidden rounded-[28px]" onClick={(e) => e.stopPropagation()}>
-        <div className="relative h-52 overflow-hidden">
+    <div className="fixed inset-0 z-[80] overflow-y-auto bg-[#08111c]/80 px-3 pb-28 pt-24 backdrop-blur-sm sm:pb-6 sm:pt-28" onClick={onClose}>
+      <div className="glass-panel animate-fade-up mx-auto max-h-[calc(100svh-8rem)] w-[min(94%,40rem)] overflow-y-auto rounded-[28px] sm:max-h-none" onClick={(e) => e.stopPropagation()}>
+        <div className="relative h-40 overflow-hidden sm:h-52">
           {img ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={img} alt={name} className="animate-kenburns size-full object-cover" />
@@ -53,17 +53,17 @@ export function GemDetail({ gem, coords, language, onClose, onNavigate }: Props)
           <button type="button" onClick={onClose} className="glass-dark absolute right-3 top-3 z-10 grid size-10 place-items-center rounded-full text-white shadow-lg shadow-black/30">
             <MaterialIcon name="close" className="size-[18px]" />
           </button>
-          <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+          <div className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-5">
             <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-black uppercase tracking-tight" style={{ backgroundColor: meta.color }}>
               <MaterialIcon name={meta.icon} className="size-3.5" />
               {lbl.cat(gem.category, language)}
             </span>
-            <h2 className="mt-2 text-2xl font-black tracking-tight drop-shadow">{name}</h2>
+            <h2 className="mt-2 text-2xl font-black tracking-tight drop-shadow sm:text-3xl">{name}</h2>
           </div>
         </div>
 
-        <div className="space-y-4 p-5">
-          <div className="animate-fade-up flex flex-wrap gap-2 text-[11px] font-bold uppercase tracking-tight">
+        <div className="space-y-3 p-4 sm:space-y-4 sm:p-5">
+          <div className="animate-fade-up flex flex-wrap gap-1.5 text-[11px] font-bold uppercase tracking-tight sm:gap-2">
             <Fact icon="schedule">{lbl.season(gem.season, language)}</Fact>
             <Fact icon="directions_walk">{lbl.reach(gem.reach, language)}</Fact>
             <Fact icon="hiking">{lbl.diff(gem.difficulty, language)}</Fact>
@@ -102,7 +102,7 @@ export function GemDetail({ gem, coords, language, onClose, onNavigate }: Props)
 
 function Fact({ icon, children }: { icon: string; children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-black/5 px-3 py-1.5 dark:bg-white/8">
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-black/5 px-2.5 py-1.5 dark:bg-white/8 sm:px-3">
       <MaterialIcon name={icon} className="size-3.5 text-[#00658b] dark:text-[#7dd0ff]" />
       {children}
     </span>
@@ -112,7 +112,7 @@ function Fact({ icon, children }: { icon: string; children: ReactNode }) {
 function Action({ icon, label, onClick, highlight }: { icon: string; label: string; onClick: () => void; highlight?: boolean }) {
   return (
     <button type="button" onClick={onClick}
-      className={`inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2.5 text-xs font-black uppercase tracking-tight transition hover:scale-[1.03] ${
+      className={`inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full px-2.5 py-2 text-[11px] font-black uppercase tracking-tight transition hover:scale-[1.03] sm:px-3 sm:py-2.5 sm:text-xs ${
         highlight ? "bg-linear-to-r from-[#00658b] to-[#0a86b8] text-white dark:from-[#6bcbff] dark:to-[#e0a32e] dark:text-[#001e2d]" : "glass-panel"
       }`}>
       <MaterialIcon name={icon} className="size-4" />

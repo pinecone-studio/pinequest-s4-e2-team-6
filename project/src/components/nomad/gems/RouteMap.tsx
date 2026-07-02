@@ -71,5 +71,5 @@ export function RouteMap({ from, to, line }: Props) {
     };
   }, [from, line, to.lat, to.lng]);
 
-  return <div ref={ref} className="h-60 w-full overflow-hidden rounded-2xl border border-white/15" />;
+  return <div ref={ref} className="h-44 w-full overflow-hidden rounded-2xl border border-white/15 sm:h-60" />;
 }
