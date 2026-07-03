@@ -1071,7 +1071,7 @@ export function SafetyScreen({ language }: SafetyScreenProps) {
             </div>
           </div>
 
-          <div className="fixed bottom-6 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center w-full px-4 max-w-sm">
+          <div className="fixed bottom-25 md:bottom-6 left-1/2 z-40 flex -translate-x-1/2 flex-col items-center w-full px-4 max-w-sm">
             {holding && (
               <div className="mb-2 rounded-full bg-black/95 px-3 py-1 text-[10px] font-black text-white backdrop-blur-md animate-bounce tracking-wider">
                 {text.sosHoldHint}
