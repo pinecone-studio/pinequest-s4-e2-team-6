@@ -47,8 +47,7 @@ const featureCopy: Record<Language, FeatureCopy> = {
   mn: {
     eyebrow: "Ухаалаг аяллын давхарга",
     title: "Камер, AR, соёл - бүгд нэг урсгалд.",
-    body:
-      "Доош гүйлгэх бүрд таних камер, AR чиглүүлэг, Монголын тухай хэрэгтэй тайлбарууд нэг дор амилна.",
+    body: "Доош гүйлгэх бүрд таних камер, AR чиглүүлэг, Монголын тухай хэрэгтэй тайлбарууд нэг дор амилна.",
     cameraTitle: "AI камер",
     cameraBody:
       "Дурсгалт газар руу камераа чиглүүлээд нэр, түүх, зай, сонсох тайлбар, хадгалах алхмуудыг шууд авна.",
@@ -77,9 +76,21 @@ const featureCopy: Record<Language, FeatureCopy> = {
     insightBody:
       "AI зөвхөн газар заахгүй. Түүх, ёс заншил, байгалийн онцлог, нутгийн хүмүүстэй хэрхэн хүндэтгэлтэй харилцахыг нэг дор ойлгуулна.",
     insightItems: [
-      ["Тал нутгийн орчин", "Уул, тал, говь, нуур, салхи, нарыг аяллын бодит нөхцөлтэй холбож тайлбарлана.", "landscape"],
-      ["Нүүдэлчин соёл", "Гэр, малчин айл, цагаан идээ, айлд орох ёс зэрэг заншлыг ойлгомжтой болгоно.", "cabin"],
-      ["Нутгийн ёс", "Овоо, хийд, ариун газар, зураг авах үеийн хүндэтгэлийн алхмуудыг санал болгоно.", "verified_user"],
+      [
+        "Тал нутгийн орчин",
+        "Уул, тал, говь, нуур, салхи, нарыг аяллын бодит нөхцөлтэй холбож тайлбарлана.",
+        "landscape",
+      ],
+      [
+        "Нүүдэлчин соёл",
+        "Гэр, малчин айл, цагаан идээ, айлд орох ёс зэрэг заншлыг ойлгомжтой болгоно.",
+        "cabin",
+      ],
+      [
+        "Нутгийн ёс",
+        "Овоо, хийд, ариун газар, зураг авах үеийн хүндэтгэлийн алхмуудыг санал болгоно.",
+        "verified_user",
+      ],
     ],
     insightStats: [
       ["1.5 сая", "км²"],
@@ -87,14 +98,14 @@ const featureCopy: Record<Language, FeatureCopy> = {
       ["21", "аймаг"],
     ],
     insightCtaKicker: "аялалд бэлэн утга",
-    insightCtaTitle: "Байгаль, түүх, хүндэтгэлтэй үйлдлийг нэг цэвэр харагдацад.",
+    insightCtaTitle:
+      "Байгаль, түүх, хүндэтгэлтэй үйлдлийг нэг цэвэр харагдацад.",
     insightCtaButton: "Газрууд үзэх",
   },
   en: {
     eyebrow: "Smart discovery layer",
     title: "Camera, AR, culture - all in one flow.",
-    body:
-      "Every scroll reveals the tools behind the trip: live recognition, spatial guidance, and Mongolia-specific context.",
+    body: "Every scroll reveals the tools behind the trip: live recognition, spatial guidance, and Mongolia-specific context.",
     cameraTitle: "AI camera",
     cameraBody:
       "Point at a landmark to identify it, hear the story, translate key details, and save the moment for later.",
@@ -123,9 +134,21 @@ const featureCopy: Record<Language, FeatureCopy> = {
     insightBody:
       "The assistant connects geography, history, etiquette, and local meaning so Mongolia feels readable while you move through it.",
     insightItems: [
-      ["Steppe context", "Mountains, valleys, desert, lakes, wind, and weather are explained as practical travel context.", "landscape"],
-      ["Nomadic culture", "Gers, herder families, dairy foods, hospitality, and seasonal movement become easier to understand.", "cabin"],
-      ["Local etiquette", "Ovoos, temples, sacred places, and photo moments come with respectful next-step guidance.", "verified_user"],
+      [
+        "Steppe context",
+        "Mountains, valleys, desert, lakes, wind, and weather are explained as practical travel context.",
+        "landscape",
+      ],
+      [
+        "Nomadic culture",
+        "Gers, herder families, dairy foods, hospitality, and seasonal movement become easier to understand.",
+        "cabin",
+      ],
+      [
+        "Local etiquette",
+        "Ovoos, temples, sacred places, and photo moments come with respectful next-step guidance.",
+        "verified_user",
+      ],
     ],
     insightStats: [
       ["1.5m", "km2"],
@@ -139,14 +162,12 @@ const featureCopy: Record<Language, FeatureCopy> = {
   zh: {
     eyebrow: "智能探索层",
     title: "相机、AR 与文化信息整合在一个流程中。",
-    body:
-      "向下滚动即可看到实时识别、AR 导航和蒙古旅行背景信息如何协同工作。",
+    body: "向下滚动即可看到实时识别、AR 导航和蒙古旅行背景信息如何协同工作。",
     cameraTitle: "AI 相机",
     cameraBody:
       "扫描地点后可识别名称、了解故事、翻译重点信息，并保存到行程中。",
     arTitle: "AR 导航",
-    arBody:
-      "寺庙、步道、观景点和路线会叠加显示在相机画面上。",
+    arBody: "寺庙、步道、观景点和路线会叠加显示在相机画面上。",
     mongoliaTitle: "蒙古洞察",
     mongoliaBody:
       "草原、游牧文化、敖包、蒙古包和当地礼仪都会以清晰易懂的方式解释。",
@@ -169,9 +190,21 @@ const featureCopy: Record<Language, FeatureCopy> = {
     insightBody:
       "助手会把地理、历史、礼仪和当地含义连接起来，让你在旅途中更容易读懂蒙古。",
     insightItems: [
-      ["草原环境", "山脉、峡谷、戈壁、湖泊、风和天气都会转化为实用的旅行背景。", "landscape"],
-      ["游牧文化", "蒙古包、牧民家庭、乳制品、待客之道和季节迁徙会变得更容易理解。", "cabin"],
-      ["当地礼仪", "敖包、寺庙、圣地和拍照场景都会提供尊重当地文化的下一步建议。", "verified_user"],
+      [
+        "草原环境",
+        "山脉、峡谷、戈壁、湖泊、风和天气都会转化为实用的旅行背景。",
+        "landscape",
+      ],
+      [
+        "游牧文化",
+        "蒙古包、牧民家庭、乳制品、待客之道和季节迁徙会变得更容易理解。",
+        "cabin",
+      ],
+      [
+        "当地礼仪",
+        "敖包、寺庙、圣地和拍照场景都会提供尊重当地文化的下一步建议。",
+        "verified_user",
+      ],
     ],
     insightStats: [
       ["150万", "平方公里"],
@@ -185,8 +218,7 @@ const featureCopy: Record<Language, FeatureCopy> = {
   ru: {
     eyebrow: "Умный слой исследования",
     title: "Камера, AR и культура в одном маршруте.",
-    body:
-      "Прокрутите вниз, чтобы увидеть, как распознавание, AR-навигация и контекст Монголии работают вместе.",
+    body: "Прокрутите вниз, чтобы увидеть, как распознавание, AR-навигация и контекст Монголии работают вместе.",
     cameraTitle: "AI-камера",
     cameraBody:
       "Наведите камеру на место, узнайте название и историю, переведите детали и сохраните их для поездки.",
@@ -215,9 +247,21 @@ const featureCopy: Record<Language, FeatureCopy> = {
     insightBody:
       "Ассистент связывает географию, историю, этикет и местные смыслы, чтобы Монголия становилась понятнее во время пути.",
     insightItems: [
-      ["Контекст степи", "Горы, долины, пустыня, озера, ветер и погода объясняются как практический контекст поездки.", "landscape"],
-      ["Кочевая культура", "Гэры, семьи скотоводов, молочные продукты, гостеприимство и сезонные кочевки становятся понятнее.", "cabin"],
-      ["Местный этикет", "Обо, храмы, священные места и моменты для фото сопровождаются уважительными подсказками.", "verified_user"],
+      [
+        "Контекст степи",
+        "Горы, долины, пустыня, озера, ветер и погода объясняются как практический контекст поездки.",
+        "landscape",
+      ],
+      [
+        "Кочевая культура",
+        "Гэры, семьи скотоводов, молочные продукты, гостеприимство и сезонные кочевки становятся понятнее.",
+        "cabin",
+      ],
+      [
+        "Местный этикет",
+        "Обо, храмы, священные места и моменты для фото сопровождаются уважительными подсказками.",
+        "verified_user",
+      ],
     ],
     insightStats: [
       ["1,5 млн", "км²"],
@@ -225,14 +269,14 @@ const featureCopy: Record<Language, FeatureCopy> = {
       ["21", "аймак"],
     ],
     insightCtaKicker: "смысл для поездки",
-    insightCtaTitle: "Природа, история и уважительное действие в одном ясном виде.",
+    insightCtaTitle:
+      "Природа, история и уважительное действие в одном ясном виде.",
     insightCtaButton: "Смотреть места",
   },
   es: {
     eyebrow: "Capa inteligente de descubrimiento",
     title: "Camara, AR y cultura en un solo flujo.",
-    body:
-      "Desplazate para ver como el reconocimiento, la guia AR y el contexto de Mongolia trabajan juntos.",
+    body: "Desplazate para ver como el reconocimiento, la guia AR y el contexto de Mongolia trabajan juntos.",
     cameraTitle: "Camara AI",
     cameraBody:
       "Apunta a un lugar para identificarlo, escuchar su historia, traducir detalles y guardarlo para despues.",
@@ -261,9 +305,21 @@ const featureCopy: Record<Language, FeatureCopy> = {
     insightBody:
       "El asistente conecta geografia, historia, etiqueta y significado local para que Mongolia sea mas facil de leer mientras viajas.",
     insightItems: [
-      ["Contexto de estepa", "Montanas, valles, desierto, lagos, viento y clima se explican como contexto practico de viaje.", "landscape"],
-      ["Cultura nomada", "Gers, familias pastoras, lacteos, hospitalidad y movimiento estacional se vuelven mas faciles de entender.", "cabin"],
-      ["Etiqueta local", "Ovoos, templos, lugares sagrados y momentos para fotos incluyen una guia respetuosa.", "verified_user"],
+      [
+        "Contexto de estepa",
+        "Montanas, valles, desierto, lagos, viento y clima se explican como contexto practico de viaje.",
+        "landscape",
+      ],
+      [
+        "Cultura nomada",
+        "Gers, familias pastoras, lacteos, hospitalidad y movimiento estacional se vuelven mas faciles de entender.",
+        "cabin",
+      ],
+      [
+        "Etiqueta local",
+        "Ovoos, templos, lugares sagrados y momentos para fotos incluyen una guia respetuosa.",
+        "verified_user",
+      ],
     ],
     insightStats: [
       ["1.5m", "km2"],
@@ -271,7 +327,8 @@ const featureCopy: Record<Language, FeatureCopy> = {
       ["21", "aimags"],
     ],
     insightCtaKicker: "significado listo para viajar",
-    insightCtaTitle: "Naturaleza, historia y accion respetuosa en una vista clara.",
+    insightCtaTitle:
+      "Naturaleza, historia y accion respetuosa en una vista clara.",
     insightCtaButton: "Explorar lugares",
   },
 };
@@ -308,7 +365,9 @@ function ScrollReveal({
     <div
       ref={ref}
       className={`transition-all duration-1000 ease-out ${
-        visible ? "translate-y-0 opacity-100 blur-0" : "translate-y-10 opacity-0 blur-sm"
+        visible
+          ? "translate-y-0 opacity-100 blur-0"
+          : "translate-y-10 opacity-0 blur-sm"
       } ${className}`}
     >
       {children}
@@ -346,7 +405,7 @@ export function DiscoverScreen({ setActive, language }: DiscoverScreenProps) {
 
           <button
             type="button"
-            onClick={() => setActive("camera")}
+            onClick={() => setActive("gems")}
             className="ring-glow animate-fade-up delay-3 mt-8 inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-linear-to-r from-[#00658b] via-[#0a86b8] to-[#e0a32e] px-9 text-base font-black uppercase tracking-tight text-white shadow-2xl transition hover:scale-[1.04]"
           >
             {text.primaryCta}
@@ -417,7 +476,9 @@ export function DiscoverScreen({ setActive, language }: DiscoverScreenProps) {
                         <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[#e0a32e]">
                           {featureText.recognizedLabel}
                         </p>
-                        <p className="mt-1 text-lg font-black tracking-tight">{featureText.landmarkName}</p>
+                        <p className="mt-1 text-lg font-black tracking-tight">
+                          {featureText.landmarkName}
+                        </p>
                         <p className="mt-1 text-xs leading-5 text-white/68">
                           {featureText.scanSummary}
                         </p>
@@ -477,7 +538,6 @@ export function DiscoverScreen({ setActive, language }: DiscoverScreenProps) {
                   </div>
                 </div>
               </ScrollReveal>
-
             </div>
           </div>
 
@@ -504,39 +564,48 @@ export function DiscoverScreen({ setActive, language }: DiscoverScreenProps) {
 
                   <div className="mt-10 grid grid-cols-3 gap-2 text-[11px] font-black uppercase tracking-tight text-[#102033]/75 dark:text-white/82 sm:max-w-lg">
                     {featureText.insightStats.map(([value, label]) => (
-                      <div key={label} className="rounded-2xl border border-[#102033]/10 bg-white/55 p-3 backdrop-blur-md dark:border-white/12 dark:bg-white/10">
-                        <p className="text-xl text-[#102033] dark:text-white sm:text-2xl">{value}</p>
-                        <p className="mt-1 text-[#102033]/48 dark:text-white/48">{label}</p>
+                      <div
+                        key={label}
+                        className="rounded-2xl border border-[#102033]/10 bg-white/55 p-3 backdrop-blur-md dark:border-white/12 dark:bg-white/10"
+                      >
+                        <p className="text-xl text-[#102033] dark:text-white sm:text-2xl">
+                          {value}
+                        </p>
+                        <p className="mt-1 text-[#102033]/48 dark:text-white/48">
+                          {label}
+                        </p>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 <div className="grid gap-4">
-                  {featureText.insightItems.map(([title, body, icon], index) => (
-                    <div
-                      key={title}
-                      className="group relative overflow-hidden rounded-[1.75rem] border border-[#102033]/10 bg-white/72 p-5 text-[#102033] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#00658b]/25 hover:bg-white/90 dark:border-white/12 dark:bg-white/[0.08] dark:text-white dark:hover:border-white/25 dark:hover:bg-white/[0.12] sm:p-6"
-                    >
-                      <div className="absolute inset-y-0 left-0 w-1 bg-linear-to-b from-[#6bcbff] via-[#f0c66a] to-[#ef7d3a]" />
-                      <div className="relative flex gap-4">
-                        <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#00658b]/10 text-[#00658b] ring-1 ring-[#00658b]/12 transition group-hover:scale-105 group-hover:text-[#a36d08] dark:bg-white/10 dark:text-[#6bcbff] dark:ring-white/12 dark:group-hover:text-[#f0c66a]">
-                          <MaterialIcon name={icon} className="size-6" />
-                        </span>
-                        <div>
-                          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#102033]/42 dark:text-white/42">
-                            0{index + 1}
-                          </p>
-                          <h3 className="mt-1 text-2xl font-black tracking-tight text-[#102033] dark:text-white">
-                            {title}
-                          </h3>
-                          <p className="mt-2 text-sm leading-7 text-[#102033]/68 dark:text-white/68">
-                            {body}
-                          </p>
+                  {featureText.insightItems.map(
+                    ([title, body, icon], index) => (
+                      <div
+                        key={title}
+                        className="group relative overflow-hidden rounded-[1.75rem] border border-[#102033]/10 bg-white/72 p-5 text-[#102033] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-[#00658b]/25 hover:bg-white/90 dark:border-white/12 dark:bg-white/[0.08] dark:text-white dark:hover:border-white/25 dark:hover:bg-white/[0.12] sm:p-6"
+                      >
+                        <div className="absolute inset-y-0 left-0 w-1 bg-linear-to-b from-[#6bcbff] via-[#f0c66a] to-[#ef7d3a]" />
+                        <div className="relative flex gap-4">
+                          <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#00658b]/10 text-[#00658b] ring-1 ring-[#00658b]/12 transition group-hover:scale-105 group-hover:text-[#a36d08] dark:bg-white/10 dark:text-[#6bcbff] dark:ring-white/12 dark:group-hover:text-[#f0c66a]">
+                            <MaterialIcon name={icon} className="size-6" />
+                          </span>
+                          <div>
+                            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#102033]/42 dark:text-white/42">
+                              0{index + 1}
+                            </p>
+                            <h3 className="mt-1 text-2xl font-black tracking-tight text-[#102033] dark:text-white">
+                              {title}
+                            </h3>
+                            <p className="mt-2 text-sm leading-7 text-[#102033]/68 dark:text-white/68">
+                              {body}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ),
+                  )}
 
                   <div className="relative overflow-hidden rounded-[1.75rem] border border-[#f0c66a]/24 bg-[#f4eede] p-5 text-[#102033] shadow-2xl sm:p-6">
                     <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(224,163,46,0.34),transparent_42%),linear-gradient(315deg,rgba(0,101,139,0.18),transparent_36%)]" />
